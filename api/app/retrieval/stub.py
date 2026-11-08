@@ -42,5 +42,18 @@ _PASSAGES = [
 class StubRetriever:
     name = "stub"
 
-    def retrieve(self, question: str, k: int) -> list[Passage]:
+    def retrieve(
+        self,
+        question: str,
+        k: int,
+        *,
+        vector: list[float] | None = None,
+        include_superseded: bool = False,
+    ) -> list[Passage]:
         return [p.model_copy() for p in _PASSAGES[:k]]
+
+    def readiness(self) -> dict[str, str]:
+        return {"retriever": "ok (stub)"}
+
+    def generation(self) -> str:
+        return "stub"
