@@ -16,6 +16,8 @@ class IndexerSettings:
     chunk_size: int
     chunk_overlap: int
     ollama_url: str
+    chunk_strategy: str = "structure"   # CHUNK_STRATEGY: structure | fixed (stage B demo)
+    ocr: bool = True                    # OCR: false indexes scans without OCR (stage A demo)
 
 
 def get_settings() -> IndexerSettings:
@@ -28,4 +30,6 @@ def get_settings() -> IndexerSettings:
         chunk_size=int(os.environ.get("CHUNK_SIZE", 400)),
         chunk_overlap=int(os.environ.get("CHUNK_OVERLAP", 50)),
         ollama_url=os.environ.get("OLLAMA_URL", "http://host.minikube.internal:11434"),
+        chunk_strategy=os.environ.get("CHUNK_STRATEGY", "structure"),
+        ocr=os.environ.get("OCR", "true").strip().lower() not in {"0", "false", "no", "off"},
     )

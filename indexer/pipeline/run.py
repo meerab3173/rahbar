@@ -63,23 +63,46 @@ def discover(corpus_dir: str) -> list[tuple[Path, str, bool]]:
     return found
 
 
-def run_pipeline(settings: IndexerSettings) -> int:
-    from .chunk import chunk
+def build_chunks(settings: IndexerSettings) -> tuple[list[Chunk], float]:
+    """Stages 1-3 for every document. Returns the chunks and the storage amplification."""
+    from .chunk import amplification, chunk
     from .clean import clean
-    from .embed import embed
     from .extract import extract
-    from .store import store
 
     documents = discover(settings.corpus_dir)
     if not documents:
         raise SystemExit(f"no documents found in {settings.corpus_dir}")
     all_chunks: list[Chunk] = []
+    cleaned = []
     for path, doc_version, superseded in documents:
-        doc = clean(extract(str(path), doc_version, superseded))
-        pieces = chunk(doc, settings.chunk_size, settings.chunk_overlap)
-        log("chunked", source=path.name, chunks=len(pieces))
+        if not path.exists():
+            log("document missing, skipped", source=path.name)
+            continue
+        raw = extract(str(path), doc_version, superseded, ocr=settings.ocr)
+        doc = clean(raw)
+        cleaned.append(doc)
+        pieces = chunk(doc, settings.chunk_size, settings.chunk_overlap,
+                       strategy=settings.chunk_strategy)
+        log("chunked", source=path.name, pages=len(raw.pages),
+            ocr_pages=sum(1 for p in raw.pages if p.ocr),
+            empty_pages=sum(1 for p in raw.pages if not p.text.strip()),
+            chunks=len(pieces), doc_version=doc_version, superseded=superseded)
         all_chunks.extend(pieces)
+    return all_chunks, amplification(all_chunks, cleaned)
+
+
+def run_pipeline(settings: IndexerSettings) -> int:
+    from .embed import embed
+    from .store import store
+
+    all_chunks, amp = build_chunks(settings)
+    log("chunking done", chunks=len(all_chunks), size=settings.chunk_size,
+        overlap=settings.chunk_overlap, strategy=settings.chunk_strategy,
+        storage_amplification=amp)
+    started = time.perf_counter()
     vectors = embed([c.text for c in all_chunks], settings)
+    log("embedded", vectors=len(vectors), dimension=len(vectors[0]) if vectors else 0,
+        embed_model=settings.embed_model, seconds=round(time.perf_counter() - started, 1))
     return store(all_chunks, vectors, settings)
 
 
@@ -95,14 +118,14 @@ def main() -> int:
     try:
         if args.dummy:
             from .dummy import write_dummy_index
-            from .store import get_client
+            from .store import wait_for_chroma
 
-            count = write_dummy_index(settings, get_client(settings))
+            count = write_dummy_index(settings, wait_for_chroma(settings))
         else:
             count = run_pipeline(settings)
-    except NotImplementedError as exc:
-        log("indexer stage not implemented yet", error=str(exc))
-        return 2
+    except Exception as exc:  # a non-zero exit fails the Job, and backoffLimit retries it
+        log("indexer failed", error=f"{type(exc).__name__}: {exc}")
+        return 1
     log("indexer finished", chunks=count, seconds=round(time.perf_counter() - started, 1))
     return 0
 
