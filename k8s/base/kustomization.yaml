@@ -1,0 +1,19 @@
+# Base: every object, namespace rahbar. Overlays (dev, prod, ci) change images and a
+# few ConfigMap values only. secret.placeholder.yaml is deliberately NOT listed.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rahbar
+resources:
+  - namespace.yaml
+  - serviceaccounts.yaml
+  - configmap.yaml
+  - networkpolicy.yaml
+  - chroma-statefulset.yaml
+  - redis.yaml
+  - services.yaml
+  - api-deployment.yaml
+  - ui-deployment.yaml
+  - hpa.yaml
+  - ingress.yaml
+  - indexer-job.yaml
+  - reindex-cronjob.yaml

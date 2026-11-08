@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: rahbar
+  labels: {app.kubernetes.io/name: api, app.kubernetes.io/part-of: rahbar}
+spec:
+  replicas: 3
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels: {app.kubernetes.io/name: api}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0          # never fewer than 3 ready pods during a rollout
+  template:
+    metadata:
+      labels: {app.kubernetes.io/name: api, app.kubernetes.io/part-of: rahbar}
+    spec:
+      serviceAccountName: api
+      automountServiceAccountToken: false
+      enableServiceLinks: false  # stops Kubernetes injecting CHROMA_PORT=tcp://... over ours
+      terminationGracePeriodSeconds: 30
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: api
+          image: rahbar-api:dev
+          imagePullPolicy: IfNotPresent
+          ports:
+            - {name: http, containerPort: 8000}
+          envFrom:
+            - configMapRef: {name: rahbar-config}
+          env:
+            - name: LLM_API_KEY
+              valueFrom:
+                secretKeyRef: {name: rahbar-secret, key: LLM_API_KEY, optional: true}
+          # Numbers from `kubectl top pods` under the eval load (docs/evidence/kubectl-top.txt,
+          # docs/ENGINEERING-NOTES.md Q4). Generation waits on Ollama, so CPU stays low.
+          resources:
+            requests:
+              cpu: 100m
+              memory: 192Mi
+            limits:
+              cpu: 500m
+              memory: 384Mi
+          startupProbe:            # finished booting? liveness and readiness wait for it
+            httpGet: {path: /healthz, port: 8000}
+            failureThreshold: 30
+            periodSeconds: 2
+          livenessProbe:           # still working? failure restarts the container
+            httpGet: {path: /healthz, port: 8000}
+            periodSeconds: 20
+            failureThreshold: 3
+            timeoutSeconds: 2
+          readinessProbe:          # can it take traffic? failure removes it from the Service
+            httpGet: {path: /readyz, port: 8000}
+            periodSeconds: 10
+            failureThreshold: 3
+            timeoutSeconds: 5
+          lifecycle:
+            preStop:               # leave the Service's endpoints before refusing connections
+              exec: {command: ["sleep", "5"]}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - {name: tmp, mountPath: /tmp}
+      volumes:
+        - name: tmp
+          emptyDir: {sizeLimit: 64Mi}
