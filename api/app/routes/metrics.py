@@ -1,23 +1,15 @@
-"""Prometheus metrics at /metrics (section 4.8).
-
-Request count and latency are wired up already. Add your own the same way:
-retrieval latency, generation latency, cache hits, abstentions, fallbacks, tokens.
-"""
+"""GET /metrics in Prometheus text format (section 4.8). The metrics live in telemetry.py."""
 
 from __future__ import annotations
 
 from fastapi import APIRouter, Response
-from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
+from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
+
+from ..telemetry import LATENCY, REQUESTS
 
 router = APIRouter()
 
-REQUESTS = Counter("rahbar_requests_total", "HTTP requests", ["path", "status"])
-LATENCY = Histogram(
-    "rahbar_request_seconds",
-    "HTTP request latency",
-    ["path"],
-    buckets=(0.05, 0.1, 0.25, 0.5, 1, 2, 5, 10, 30, 60),
-)
+__all__ = ["router", "REQUESTS", "LATENCY"]
 
 
 @router.get("/metrics")

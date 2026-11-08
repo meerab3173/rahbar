@@ -1,8 +1,17 @@
-"""Liveness and readiness (section 4.3). They answer different questions."""
+"""Liveness and readiness (section 4.3). They answer different questions.
+
+/healthz: is the process alive? It touches nothing else, so a slow Chroma can never make
+the kubelet restart healthy API pods (a restart storm).
+/readyz: can this pod take traffic now? 200 only if Chroma is reachable, the active
+collection exists and is non-empty, its embedding model matches EMBED_MODEL (the pin,
+section 4.4), and Redis is reachable. Otherwise 503, naming what failed.
+"""
 
 from __future__ import annotations
 
 from fastapi import APIRouter, Request, Response
+
+from ..services.readiness import readiness_checks
 
 router = APIRouter()
 
@@ -15,8 +24,9 @@ def healthz() -> dict[str, str]:
 
 @router.get("/readyz")
 def readyz(request: Request, response: Response) -> dict[str, object]:
-    # STARTER-TODO(4.3, 4.4): return 503, naming the failed dependency, unless Chroma is
-    # reachable, the collection exists and is non-empty, Redis is reachable, and the
-    # collection's embedding model matches EMBED_MODEL. Until then this always says yes,
-    # which is exactly the lie section 4.2 warns about.
-    return {"status": "ready", "checks": {}}
+    checks = readiness_checks(request.app.state.pipeline)
+    failed = [name for name, result in checks.items() if not result.startswith("ok")]
+    if len(failed) > 0:
+        response.status_code = 503
+        return {"status": "not ready", "failed": failed, "checks": checks}
+    return {"status": "ready", "checks": checks}
