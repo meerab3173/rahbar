@@ -5,6 +5,8 @@
     python corpus/fetch.py --force               # download everything again
     python corpus/fetch.py --verify              # re-hash local files against MANIFEST.md
     python corpus/fetch.py --list URL            # list the documents linked from an index page
+    python corpus/fetch.py --out /corpus         # the indexer Job's init container (ADR 0001)
+    python corpus/fetch.py --out /corpus --verify --warn-only   # compare with MANIFEST.md
 
 Writes:
     corpus/raw/<file>         the documents (gitignored: never commit someone else's PDFs)
@@ -162,10 +164,11 @@ def write_manifest(entries: list[dict]) -> None:
     MANIFEST.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def verify() -> int:
-    if not MANIFEST.exists():
-        sys.exit("no corpus/MANIFEST.md yet; run fetch first")
-    rows = re.findall(r"\| `([^`]+)` \| [\d,]+ \| `([0-9a-f]{64})` \|", MANIFEST.read_text())
+def verify(manifest: Path | None = None) -> int:
+    manifest = manifest or MANIFEST
+    if not manifest.exists():
+        sys.exit(f"no {manifest} yet; run fetch first")
+    rows = re.findall(r"\| `([^`]+)` \| [\d,]+ \| `([0-9a-f]{64})` \|", manifest.read_text())
     bad = 0
     for file, expected in rows:
         path = RAW / file
@@ -229,9 +232,20 @@ def main() -> int:
     group.add_argument("--force", action="store_true", help="download everything again")
     group.add_argument("--verify", action="store_true", help="check local files against MANIFEST.md")
     group.add_argument("--list", metavar="URL", help="list document links on an index page")
+    parser.add_argument("--out", type=Path, help="download into this directory instead of "
+                        "corpus/raw (the committed MANIFEST.md is then only read)")
+    parser.add_argument("--warn-only", action="store_true",
+                        help="with --verify: report differences but exit 0")
     args = parser.parse_args()
+    global RAW, MANIFEST
+    committed = MANIFEST
+    if args.out:
+        RAW = args.out
+        RAW.mkdir(parents=True, exist_ok=True)
+        MANIFEST = RAW / "MANIFEST.md"
     if args.verify:
-        return verify()
+        code = verify(committed)
+        return 0 if args.warn_only else code
     if args.list:
         return list_documents(args.list)
     return fetch(force=args.force)
