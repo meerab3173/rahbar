@@ -1,0 +1,32 @@
+# Ephemeral kind cluster for ci.yml e2e-eval and cd.yml deploy: no model, no network.
+# hash-bow-768 embeds offline, the stub provider generates, the fixture corpus is baked
+# into the indexer image. Same objects, probes, policies and pin check as production.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+  - {name: rahbar-api, newTag: ci}
+  - {name: rahbar-ui, newTag: ci}
+  - {name: rahbar-indexer, newTag: ci}
+patches:
+  - path: config.yaml
+  - target: {kind: CronJob, name: reindex}
+    patch: |-
+      - op: add
+        path: /spec/suspend
+        value: true
+  # kind runners are small: keep the shape, shrink the requests.
+  - target: {kind: Deployment, name: api}
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/cpu
+        value: 50m
+  - target: {kind: Job, name: indexer}
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/cpu
+        value: 50m
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/memory
+        value: 128Mi
