@@ -1,0 +1,19 @@
+# Question pairs for choosing CACHE_THRESHOLD (section 3.3). `same: true` pairs should be
+# served from one cache entry (paraphrases with the same answer). `same: false` pairs look
+# alike but have DIFFERENT answers in our corpus: if their similarity reaches the
+# threshold, the cache would serve a wrong answer (a false hit).
+# Rule from the lecture: ship the lowest threshold with zero false hits.
+pairs:
+  - {same: true,  a: "What is the minimum attendance requirement?", b: "How much attendance is required in lectures?"}
+  - {same: true,  a: "What CGPA do I need to avoid academic warning?", b: "Below what CGPA is a student put on academic warning?"}
+  - {same: true,  a: "How many semesters can I freeze?", b: "For how many semesters can a student freeze admission?"}
+  - {same: true,  a: "What is the minimum CGPA required to graduate?", b: "What CGPA is needed for graduation?"}
+  - {same: true,  a: "How many courses can I repeat in summer?", b: "What is the maximum number of courses in the summer semester?"}
+  - {same: true,  a: "What is the library fine for a late book?", b: "How much is the overdue fine per book per day?"}
+  # Near misses: same words, different answers
+  - {same: false, a: "How many courses can I take in the summer semester?", b: "How many courses can I take in a regular semester?"}          # 2 vs 5
+  - {same: false, a: "What attendance is required in summer courses?", b: "What attendance is required in regular semester courses?"}   # 80% rule (6.7) vs 100% (1.21)
+  - {same: false, a: "What is the grade point for a B-?", b: "What is the grade point for a B+?"}                                       # 2.67 vs 3.33
+  - {same: false, a: "How many books can an undergraduate borrow?", b: "How many books can a graduate student borrow?"}                 # 4 vs 5
+  - {same: false, a: "What CGPA is needed to graduate?", b: "What CGPA is needed for a position medal?"}                                # 2.00 vs 3.00
+  - {same: false, a: "When is the deadline to withdraw from a course?", b: "When is the deadline to add or drop a course?"}             # makeup week vs first two weeks
