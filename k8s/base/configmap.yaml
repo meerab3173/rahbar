@@ -15,7 +15,7 @@ data:
   LLM_MODEL: "llama3.2:3b"
   OLLAMA_URL: "http://host.minikube.internal:11434"
   HOSTED_BASE_URL: ""                    # e.g. https://api.groq.com/openai/v1 (key in rahbar-secret)
-  LLM_TIMEOUT: "60"
+  LLM_TIMEOUT: "240"
   # --- the embedding pin: the indexer writes it into the collection, the api checks it ---
   EMBED_MODEL: "nomic-embed-text"
   # --- vector store ---

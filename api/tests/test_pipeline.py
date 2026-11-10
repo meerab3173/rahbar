@@ -252,3 +252,12 @@ def test_exact_term_guard_blocks_a_lookalike_even_at_a_low_threshold() -> None:
     r = ask(pipe, "What is the grade point for a B+ grade?")
     assert r.cached is False
     assert len(provider.seen) == 2
+
+
+def test_section_labels_reach_the_model_unchanged() -> None:
+    """Regression: '>' in "chapter > heading" labels was rewritten to ')', so the model's
+    citations matched no retrieved chunk and every answer fell back."""
+    p = passage("c1", "5.4 Minimum CGPA is 2.00.",
+                section="5. Academic Assessment > Academic Warning/Probation")
+    user = build_messages("What CGPA?", [p])[1]["content"]
+    assert 'section="5. Academic Assessment > Academic Warning/Probation"' in user

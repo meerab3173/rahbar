@@ -6,7 +6,7 @@ metadata:
   namespace: rahbar
   labels: {app.kubernetes.io/part-of: rahbar}
   annotations:
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-body-size: "16k"
 spec:
   ingressClassName: nginx

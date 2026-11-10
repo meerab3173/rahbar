@@ -40,7 +40,7 @@ def neutralise(text: str) -> str:
 
 
 def _attr(value: object) -> str:
-    return str(value).replace('"', "'").replace("<", "(").replace(">", ")")
+    return str(value).replace('"', "'").replace("<", "(")   # keep ">": section labels use it
 
 
 def schema_json() -> str:
