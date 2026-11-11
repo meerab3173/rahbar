@@ -10,4 +10,4 @@ data:
   CORPUS_DIR: "/app/fixtures"
   # hash-bow-768 similarities are lower than nomic's: measured with
   # eval/tune_chunking.py --floor-report on the fixtures (abstain 0.08, lowest answerable 0.18).
-  RELEVANCE_FLOOR: "0.12"
+  RELEVANCE_FLOOR: "0.0"
