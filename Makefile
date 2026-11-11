@@ -96,7 +96,7 @@ demo-pin: ## section 4.4: change EMBED_MODEL on the api only and watch it refuse
 	kubectl -n $(NS) set env deployment/api EMBED_MODEL=all-minilm
 	kubectl -n $(NS) rollout status deployment/api --timeout=60s || true
 	kubectl -n $(NS) get pods -l app.kubernetes.io/name=api | tee docs/evidence/pin-guard.txt
-	kubectl -n $(NS) logs deployment/api | grep "embedding pin" | tee -a docs/evidence/pin-guard.txt
+	kubectl -n $(NS) logs $$(kubectl -n $(NS) get pods -l app.kubernetes.io/name=api --sort-by=.metadata.creationTimestamp -o name | tail -1) | grep "embedding pin" | tee -a docs/evidence/pin-guard.txt
 	kubectl -n $(NS) rollout undo deployment/api
 
 check: ## run the submission checker
