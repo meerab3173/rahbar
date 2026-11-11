@@ -1,0 +1,10 @@
+
+Embedding model: nomic-embed-text   strategy: structure   hybrid_weight: 0.0   corpus: corpus/raw (9 documents)
+
+| Size (tokens) | Overlap (tokens) | recall@3 | recall@5 | Chunks stored | Amplification |
+| --- | --- | --- | --- | --- | --- |
+| 200 | 30 | 0.632 | 0.658 | 1038 | 1.113 |
+
+| Size:overlap | recall@5 exact | recall@5 injection | recall@5 ordinary | recall@5 version |
+| --- | --- | --- | --- | --- |
+| 200:30 | 0.25 | 1.0 | 0.773 | 0.667 |

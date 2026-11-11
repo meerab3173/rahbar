@@ -23,15 +23,15 @@ data:
   CHROMA_PORT: "8000"
   CHROMA_COLLECTION: "rahbar"
   # --- indexing (tokens = whitespace words; measured in docs/PIPELINE.md) ---
-  CHUNK_SIZE: "400"
-  CHUNK_OVERLAP: "50"
+  CHUNK_SIZE: "200"
+  CHUNK_OVERLAP: "30"
   CHUNK_STRATEGY: "structure"
   OCR: "true"
   CORPUS_SOURCE: "fetch"                 # fetch | fixtures
   CORPUS_DIR: "/corpus"
   # --- retrieval ---
   TOP_K: "5"
-  RELEVANCE_FLOOR: "0.45"                # top similarity below this => abstain (PIPELINE.md)
+  RELEVANCE_FLOOR: "0.69"                # top similarity below this => abstain (PIPELINE.md)
   HYBRID_WEIGHT: "0.15"                  # exact-term boost in the rerank; 0 turns it off
   CANDIDATES: "4"
   # --- generation ---

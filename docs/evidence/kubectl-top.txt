@@ -1,0 +1,762 @@
+14:08:57
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           66Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     20m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           533Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:03
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           66Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     20m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           533Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:08
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           66Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     20m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           533Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:14
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           66Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     20m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           533Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:19
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           66Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     20m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           533Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:25
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:30
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:36
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:41
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:47
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:52
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:09:58
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:03
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:09
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:14
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:20
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           536Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:26
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:31
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:37
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:42
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:48
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:53
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:10:59
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:04
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:09
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:15
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:20
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       8m           65Mi            
+chroma-0                   chroma    4m           65Mi            
+redis-74cd7b5755-qncmq     redis     16m          14Mi            
+reindex-1794384464-mbpmv   indexer   1m           540Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:26
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:31
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:37
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:42
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:48
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:53
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:11:59
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:04
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:10
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:15
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:21
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       7m           75Mi            
+api-6c99d94f5c-dknwj       api       7m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    5m           64Mi            
+redis-74cd7b5755-qncmq     redis     16m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           541Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:26
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:32
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:37
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:42
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:48
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:54
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:12:59
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:13:05
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:13:10
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:13:16
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:13:21
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       6m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   1m           543Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:13:26
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           549Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:13:32
+POD                        NAME      CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d       api       6m           75Mi            
+api-6c99d94f5c-dknwj       api       6m           66Mi            
+api-6c99d94f5c-lhqdb       api       7m           65Mi            
+chroma-0                   chroma    4m           64Mi            
+redis-74cd7b5755-qncmq     redis     15m          13Mi            
+reindex-1794384464-mbpmv   indexer   2m           549Mi           
+ui-85df586949-gsng5        ui        1m           2Mi             
+
+14:13:37
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:13:42
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:13:47
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:13:53
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:13:58
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:03
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:08
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:14
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:19
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      6m           75Mi            
+api-6c99d94f5c-dknwj     api      6m           66Mi            
+api-6c99d94f5c-lhqdb     api      7m           65Mi            
+chroma-0                 chroma   4m           64Mi            
+redis-74cd7b5755-qncmq   redis    15m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:24
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:29
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:34
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:40
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:45
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:50
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:14:55
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:00
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:06
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:11
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:16
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:21
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      5m           66Mi            
+api-6c99d94f5c-lhqdb     api      5m           65Mi            
+chroma-0                 chroma   34m          93Mi            
+redis-74cd7b5755-qncmq   redis    11m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:27
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      4m           66Mi            
+api-6c99d94f5c-lhqdb     api      4m           65Mi            
+chroma-0                 chroma   3m           93Mi            
+redis-74cd7b5755-qncmq   redis    10m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:32
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      4m           66Mi            
+api-6c99d94f5c-lhqdb     api      4m           65Mi            
+chroma-0                 chroma   3m           93Mi            
+redis-74cd7b5755-qncmq   redis    10m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:37
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      4m           66Mi            
+api-6c99d94f5c-lhqdb     api      4m           65Mi            
+chroma-0                 chroma   3m           93Mi            
+redis-74cd7b5755-qncmq   redis    10m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:42
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      4m           66Mi            
+api-6c99d94f5c-lhqdb     api      4m           65Mi            
+chroma-0                 chroma   3m           93Mi            
+redis-74cd7b5755-qncmq   redis    10m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:47
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      4m           66Mi            
+api-6c99d94f5c-lhqdb     api      4m           65Mi            
+chroma-0                 chroma   3m           93Mi            
+redis-74cd7b5755-qncmq   redis    10m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:53
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      4m           66Mi            
+api-6c99d94f5c-lhqdb     api      4m           65Mi            
+chroma-0                 chroma   3m           93Mi            
+redis-74cd7b5755-qncmq   redis    10m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+
+14:15:58
+POD                      NAME     CPU(cores)   MEMORY(bytes)   
+api-6c99d94f5c-9d75d     api      5m           75Mi            
+api-6c99d94f5c-dknwj     api      4m           66Mi            
+api-6c99d94f5c-lhqdb     api      4m           65Mi            
+chroma-0                 chroma   3m           93Mi            
+redis-74cd7b5755-qncmq   redis    10m          13Mi            
+ui-85df586949-gsng5      ui       1m           2Mi             
+

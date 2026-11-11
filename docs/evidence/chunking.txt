@@ -1,0 +1,37 @@
+
+Embedding model: nomic-embed-text   strategy: structure   hybrid_weight: 0.15   corpus: corpus/raw (9 documents)
+
+| Size (tokens) | Overlap (tokens) | recall@3 | recall@5 | Chunks stored | Amplification |
+| --- | --- | --- | --- | --- | --- |
+| 200 | 30 | 0.632 | 0.658 | 1038 | 1.113 |
+| 400 | 50 | 0.605 | 0.632 | 777 | 1.056 |
+| 800 | 100 | 0.605 | 0.632 | 696 | 1.039 |
+
+| Size:overlap | recall@5 exact | recall@5 injection | recall@5 ordinary | recall@5 version |
+| --- | --- | --- | --- | --- |
+| 200:30 | 0.25 | 1.0 | 0.773 | 0.667 |
+| 400:50 | 0.25 | 1.0 | 0.727 | 0.667 |
+| 800:100 | 0.25 | 1.0 | 0.727 | 0.667 |
+
+Top similarity per question (choose RELEVANCE_FLOOR between the highest must-abstain score and the lowest answerable score):
+  q01   ordinary            0.8668
+  q02   ordinary            0.7569
+  q03   ordinary            0.7890
+  q04   ordinary            0.8847
+  q05   ordinary            0.7866
+  q06   ordinary            0.8724
+  q07   ordinary            0.8009
+  q08   ordinary            0.7555
+  q09   ordinary            0.6964
+  q10   ordinary            0.7148
+  q11   ordinary            0.7655
+  q12   version             0.8172
+  q13   version             0.8104
+  q14   version             0.7656
+  q15   exact               0.7118
+  q16   exact               0.7299
+  q17   exact               0.7132
+  q18   exact               0.8348
+  q19   abstain    ABSTAIN  0.6399
+  q20   abstain    ABSTAIN  0.6863
+  q21   injection           0.8130
