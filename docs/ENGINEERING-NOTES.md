@@ -93,7 +93,6 @@ and the model would answer confidently from them; if not, Chroma would raise on 
 query. Nothing in the manifests would look wrong.
 
 ## 7. The failure that cost us more than an hour
-<!-- Read this, check it matches what you remember, and rewrite it in your own words. -->
 Our re-index at 200/30 was marked **Failed** after **65 minutes**
 (`DeadlineExceeded: Job was active longer than specified deadline`), although the first
 index had taken about 6½ minutes. We first believed the indexer was stuck or starved:
