@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "3.12", cache: pip}
       - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - name: system packages for the OCR tests
+        run: sudo apt-get update -q && sudo apt-get install -y -q poppler-utils tesseract-ocr
       - run: cd api && pytest -q --cov=app --cov-fail-under=60
       - run: cd indexer && pytest -q
 

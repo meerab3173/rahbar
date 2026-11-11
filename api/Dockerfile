@@ -14,7 +14,9 @@ RUN apt-get update && apt-get upgrade -y && rm -rf /var/lib/apt/lists/* \
 
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
+RUN pip install --upgrade pip "setuptools>=78.1.1" wheel \
+    && rm -f /usr/local/lib/python3.12/ensurepip/_bundled/setuptools-*.whl \
+    && pip install -r requirements.txt
 COPY app ./app
 
 USER 10001

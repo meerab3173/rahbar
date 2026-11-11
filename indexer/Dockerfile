@@ -17,7 +17,9 @@ RUN apt-get update && apt-get upgrade -y \
 
 WORKDIR /app
 COPY indexer/requirements.txt .
-RUN pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
+RUN pip install --upgrade pip "setuptools>=78.1.1" wheel \
+    && rm -f /usr/local/lib/python3.12/ensurepip/_bundled/setuptools-*.whl \
+    && pip install -r requirements.txt
 COPY indexer/pipeline ./pipeline
 COPY corpus/ ./corpus/
 COPY eval/fixtures ./fixtures

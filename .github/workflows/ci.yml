@@ -38,6 +38,8 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: "${{ env.PYTHON_VERSION }}", cache: pip}
       - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - name: system packages for the OCR tests
+        run: sudo apt-get update -q && sudo apt-get install -y -q poppler-utils tesseract-ocr
       - name: pytest api (stub provider, no network, coverage >= 60%)
         run: cd api && pytest -q --cov=app --cov-report=term-missing --cov-fail-under=60
       - name: pytest indexer
