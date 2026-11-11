@@ -133,7 +133,7 @@ Branches: `dev` for work; `main` is protected (pull request, CI green, one appro
 kubeconform -strict) · build · Trivy scan · **e2e-eval** on a kind cluster with the fixture
 corpus and the section 5.4 gate. `cd.yml` (push to main): test → build-push to Docker Hub
 tagged with the commit SHA → deploy to an ephemeral kind cluster, rollout status, smoke
-test through the Ingress. Images: `https://hub.docker.com/u/your-dockerhub-username`.
+test through the Ingress. Images: `https://hub.docker.com/u/meerabriaz`.
 
 ## Secrets
 
@@ -141,7 +141,7 @@ Nothing secret is in this repository. The only secret is the optional hosted-LLM
 created from the command line (`kubectl create secret generic rahbar-secret -n rahbar
 --from-literal=LLM_API_KEY="$LLM_API_KEY"`, i.e. `make secret`).
 `k8s/base/secret.placeholder.yaml` documents its shape with `REPLACE_ME` and is not
-applied. CI uses GitHub Secrets `your-dockerhub-usernameNAME` and `DOCKERHUB_TOKEN` (an access
+applied. CI uses GitHub Secrets `meerabriazNAME` and `DOCKERHUB_TOKEN` (an access
 token).
 
 ## Licence
