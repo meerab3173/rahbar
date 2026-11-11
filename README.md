@@ -1,7 +1,7 @@
 # RAHBAR: grounded answers from FAST-NUCES documents, on Kubernetes
 
-[![ci](https://github.com/OWNER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/ci.yml)
-[![cd](https://github.com/OWNER/REPO/actions/workflows/cd.yml/badge.svg)](https://github.com/OWNER/REPO/actions/workflows/cd.yml)
+[![ci](https://github.com/meerab3173/rahbar/actions/workflows/ci.yml/badge.svg)](https://github.com/meerab3173/rahbar/actions/workflows/ci.yml)
+[![cd](https://github.com/meerab3173/rahbar/actions/workflows/cd.yml/badge.svg)](https://github.com/meerab3173/rahbar/actions/workflows/cd.yml)
 
 A 5th-semester student wants to know whether they can register for a course after failing
 its prerequisite. The answer is a clause in a handbook PDF on the university website, and
@@ -14,7 +14,7 @@ scales horizontally, survives a deleted pod, and has a CI gate that fails the bu
 retrieval quality drops.
 
 Course assignment 02 (CS4032 / AI Engineering), FAST-NUCES Islamabad. Team: Meerab Riaz
-(24I-3173) and **PARTNER NAME (roll no.)**.
+(24I-3173) and **Ammn Khan (24I-3153)**.
 
 ![RAHBAR chat UI answering with citations](docs/evidence/screenshot-ui.png)
 
@@ -63,7 +63,7 @@ You need Docker, minikube, kubectl, Python 3.12, make, and [Ollama](https://olla
 On Windows, run everything inside WSL 2.
 
 ```bash
-git clone https://github.com/OWNER/REPO.git rahbar && cd rahbar
+git clone https://github.com/meerab3173/rahbar.git rahbar && cd rahbar
 
 # 1. Cluster: minikube with Calico (the default CNI ignores NetworkPolicy), metrics-server, ingress
 make cluster
@@ -133,7 +133,7 @@ Branches: `dev` for work; `main` is protected (pull request, CI green, one appro
 kubeconform -strict) · build · Trivy scan · **e2e-eval** on a kind cluster with the fixture
 corpus and the section 5.4 gate. `cd.yml` (push to main): test → build-push to Docker Hub
 tagged with the commit SHA → deploy to an ephemeral kind cluster, rollout status, smoke
-test through the Ingress. Images: `https://hub.docker.com/u/DOCKERHUB_USER`.
+test through the Ingress. Images: `https://hub.docker.com/u/your-dockerhub-username`.
 
 ## Secrets
 
@@ -141,7 +141,7 @@ Nothing secret is in this repository. The only secret is the optional hosted-LLM
 created from the command line (`kubectl create secret generic rahbar-secret -n rahbar
 --from-literal=LLM_API_KEY="$LLM_API_KEY"`, i.e. `make secret`).
 `k8s/base/secret.placeholder.yaml` documents its shape with `REPLACE_ME` and is not
-applied. CI uses GitHub Secrets `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN` (an access
+applied. CI uses GitHub Secrets `your-dockerhub-usernameNAME` and `DOCKERHUB_TOKEN` (an access
 token).
 
 ## Licence
