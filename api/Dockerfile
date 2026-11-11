@@ -16,7 +16,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --upgrade pip "setuptools>=78.1.1" wheel \
     && rm -f /usr/local/lib/python3.12/ensurepip/_bundled/setuptools-*.whl \
-    && pip install -r requirements.txt
+    && pip install -r requirements.txt \
+    # pip is a build tool only; removing it shrinks the attack surface and drops its
+    # vendored setuptools 70.3.0 inventory (pip/_vendor/bom.cdx.json) that Trivy flags.
+    && python -m pip uninstall -y pip
 COPY app ./app
 
 USER 10001
