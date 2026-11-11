@@ -55,4 +55,5 @@ start and stop is also what a single-writer database wants.
 | Everything is admin | one ServiceAccount per workload, `automountServiceAccountToken: false` on every pod |
 | Containers as root | `runAsNonRoot: true`, `readOnlyRootFilesystem: true`, `capabilities.drop: [ALL]`, `allowPrivilegeEscalation: false`, seccomp RuntimeDefault; writable `/tmp` emptyDirs only |
 | Flat network | `networkpolicy.yaml`; the ui pod has DNS egress only, so it cannot reach chroma |
+| Supply chain | Trivy gate in CI (HIGH/CRITICAL with a fix fails the build); setuptools ≥ 78.1.1; **no package manager in the runtime images** (`pip uninstall pip` after install), which also removed pip's vendored setuptools 70.3.0 that Trivy flagged |
 | Unsafe model output | schema-constrained, Pydantic-validated, citations re-checked, injection echo blocked, never `eval`'d, never used to build a query |
