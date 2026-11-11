@@ -40,7 +40,7 @@ data:
   # --- semantic cache ---
   CACHE_BACKEND: "redis"
   REDIS_URL: "redis://redis:6379/0"
-  CACHE_THRESHOLD: "0.95"                # lowest value with zero false hits (PIPELINE.md)
+  CACHE_THRESHOLD: "0.88"                # lowest value with zero false hits (PIPELINE.md)
   CACHE_TTL_SECONDS: "86400"
   CACHE_MAX_ENTRIES: "200"
   LOG_LEVEL: "INFO"

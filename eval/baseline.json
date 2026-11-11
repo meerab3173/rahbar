@@ -1,0 +1,440 @@
+{
+  "recall@3": 0.5789,
+  "recall@5": 0.6579,
+  "citation_validity": 1.0,
+  "citations_checked": 17,
+  "abstention_correctness": 1.0,
+  "must_abstain_questions": 2,
+  "expect_hit_rate": 0.7368,
+  "answered_rate": 0.8947,
+  "by_type": {
+    "abstain": {
+      "questions": 2,
+      "recall@3": null,
+      "recall@5": null
+    },
+    "exact": {
+      "questions": 4,
+      "recall@3": 0.25,
+      "recall@5": 0.25
+    },
+    "injection": {
+      "questions": 1,
+      "recall@3": 1.0,
+      "recall@5": 1.0
+    },
+    "ordinary": {
+      "questions": 11,
+      "recall@3": 0.6364,
+      "recall@5": 0.7727
+    },
+    "version": {
+      "questions": 3,
+      "recall@3": 0.6667,
+      "recall@5": 0.6667
+    }
+  },
+  "per_question": [
+    {
+      "id": "q01",
+      "type": "ordinary",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.8668,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 5. Academic Assessment > Academic Warning/Probation",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "academic-rules-handbook-jun-2026.pdf / 5. Academic Assessment > Repeating a Course",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Registration of Students under Academic Warning"
+      ],
+      "cached": true,
+      "seconds": 0.92
+    },
+    {
+      "id": "q02",
+      "type": "ordinary",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7569,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 5. Academic Assessment > Academic Warning/Probation",
+        "academic-rules-handbook-jun-2026.pdf / 5. Academic Assessment > Repeating a Course",
+        "academic-rules-handbook-jun-2026.pdf / 5. Academic Assessment > Repeating a Course",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average"
+      ],
+      "cached": true,
+      "seconds": 0.09
+    },
+    {
+      "id": "q03",
+      "type": "ordinary",
+      "recall@3": 0.5,
+      "recall@5": 0.5,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.8272,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 5. Academic Assessment > Repeating a Course",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "academic-rules-handbook-jun-2026.pdf / 5. Academic Assessment > Repeating a Course",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "academic-rules-handbook-jun-2026.pdf / 1. Introduction > A, A- Excellent"
+      ],
+      "cached": true,
+      "seconds": 0.08
+    },
+    {
+      "id": "q04",
+      "type": "ordinary",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.8847,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Freezing of Semester",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > 19. Rules for Summer Semester",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Withdrawal from a Course",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION"
+      ],
+      "cached": true,
+      "seconds": 0.09
+    },
+    {
+      "id": "q05",
+      "type": "ordinary",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7866,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Withdrawal from a Course",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Withdrawal from a Course",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Adding or Dropping a Course",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average"
+      ],
+      "cached": true,
+      "seconds": 0.08
+    },
+    {
+      "id": "q06",
+      "type": "ordinary",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.8724,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Adding or Dropping a Course",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Adding or Dropping a Course",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION",
+        "academic-rules-handbook-jun-2026.pdf / 6. Rules for Summer Semester > B. Graduating"
+      ],
+      "cached": true,
+      "seconds": 0.09
+    },
+    {
+      "id": "q07",
+      "type": "ordinary",
+      "recall@3": 0.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7957,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 7. Awards and the Honor System",
+        "academic-rules-handbook-jun-2026.pdf / 5. Academic Assessment > Academic Warning/Probation",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "academic-rules-handbook-jun-2026.pdf / 1. Introduction > Average (SGPA) and the Cumulative Grade Point Average",
+        "academic-rules-handbook-jun-2026.pdf / 1. Introduction > Bachelor\u2019s Degree Requirements"
+      ],
+      "cached": true,
+      "seconds": 0.08
+    },
+    {
+      "id": "q08",
+      "type": "ordinary",
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7555,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Adding or Dropping a Course",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Adding or Dropping a Course",
+        "academic-rules-handbook-jun-2026.pdf / 1. Introduction > Scheduling of Classes"
+      ],
+      "cached": true,
+      "seconds": 0.08
+    },
+    {
+      "id": "q09",
+      "type": "ordinary",
+      "recall@3": 0.5,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7036,
+      "retrieved": [
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > 4. Acceptable Uses of Generative AI Tools",
+        "academic-rules-handbook-jun-2026.pdf / 6. Generative AI and Assessments",
+        "academic-rules-handbook-jun-2026.pdf / 5. Unacceptable Uses of Generative AI Tools",
+        "academic-rules-handbook-jun-2026.pdf / 1. Introduction",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > 5. Unacceptable Uses of Generative AI Tools"
+      ],
+      "cached": true,
+      "seconds": 0.08
+    },
+    {
+      "id": "q10",
+      "type": "ordinary",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7529,
+      "retrieved": [
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Chiniot-Faisalabad Campus",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Chiniot-Faisalabad Campus"
+      ],
+      "cached": true,
+      "seconds": 0.07
+    },
+    {
+      "id": "q11",
+      "type": "ordinary",
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7826,
+      "retrieved": [
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR"
+      ],
+      "cached": true,
+      "seconds": 0.09
+    },
+    {
+      "id": "q12",
+      "type": "version",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.8199,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 6. Rules for Summer Semester > B. Graduating",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > 19. Rules for Summer Semester",
+        "academic-rules-handbook-jun-2026.pdf / 6. Rules for Summer Semester > B. Graduating",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > 19. Rules for Summer Semester",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > 19. Rules for Summer Semester"
+      ],
+      "cached": true,
+      "seconds": 0.08
+    },
+    {
+      "id": "q13",
+      "type": "version",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.8151,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 6. Rules for Summer Semester > B. Graduating",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > 19. Rules for Summer Semester",
+        "academic-rules-handbook-jun-2026.pdf / 6. Rules for Summer Semester > B. Graduating",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > 19. Rules for Summer Semester",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Adding or Dropping a Course"
+      ],
+      "cached": true,
+      "seconds": 0.09
+    },
+    {
+      "id": "q14",
+      "type": "version",
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "citation_validity": null,
+      "answered_from_context": false,
+      "must_abstain": false,
+      "top_score": 0.8061,
+      "retrieved": [
+        "academic-rules-handbook-jun-2025.pdf / 4. Registration > Rechecking of Final Exams",
+        "academic-rules-handbook-jun-2025.pdf / 4. Registration > Rechecking of Final Exams",
+        "academic-rules-handbook-jun-2025.pdf / 4. Registration > Withdrawal from a Course",
+        "academic-rules-handbook-jun-2026.pdf / 4. Registration > Withdrawal from a Course",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION"
+      ],
+      "cached": false,
+      "seconds": 87.76
+    },
+    {
+      "id": "q15",
+      "type": "exact",
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7118,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / I I",
+        "academic-rules-handbook-jun-2026.pdf / 8. Academic Honesty",
+        "academic-rules-handbook-jun-2026.pdf / 8. Academic Honesty",
+        "academic-rules-handbook-jun-2026.pdf / 3. Guidelines for Use",
+        "student-handbook-jun-2026.pdf / CODE OF CONDUCT"
+      ],
+      "cached": true,
+      "seconds": 0.97
+    },
+    {
+      "id": "q16",
+      "type": "exact",
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.7299,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 1. Introduction > Grade Points Grade Points",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Academic Year of the University calculating the Grade Point",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > 7. Grade Point Average"
+      ],
+      "cached": true,
+      "seconds": 0.29
+    },
+    {
+      "id": "q17",
+      "type": "exact",
+      "recall@3": 0.0,
+      "recall@5": 0.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.6989,
+      "retrieved": [
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Undergradu 04 02 02 Weeks PKR PKR"
+      ],
+      "cached": true,
+      "seconds": 0.31
+    },
+    {
+      "id": "q18",
+      "type": "exact",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": null,
+      "answered_from_context": false,
+      "must_abstain": false,
+      "top_score": 0.8348,
+      "retrieved": [
+        "fee-structure-page.html / Fee Structure > Tuition Fee (w.e.f. Fall 2026 semester)",
+        "admissions-faq-page.html / HAT-Subject for PhD OR NU Admission Test",
+        "academic-rules-handbook-jun-2026.pdf / 1. Introduction > Credit Hour",
+        "prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement 4. Semester Course Load",
+        "prospectus-2026-academic-rules-and-regulations.pdf / I - Incomplete > Cumulative Grade Point Average"
+      ],
+      "cached": false,
+      "seconds": 52.76
+    },
+    {
+      "id": "q19",
+      "type": "abstain",
+      "recall@3": null,
+      "recall@5": null,
+      "citation_validity": null,
+      "answered_from_context": false,
+      "must_abstain": true,
+      "top_score": 0.6399,
+      "retrieved": [
+        "fee-structure-page.html / Fee Structure > Miscellaneous Fees",
+        "admissions-faq-page.html / HAT-Subject for PhD OR NU Admission Test",
+        "admissions-faq-page.html / Student Activity Fund",
+        "fee-structure-page.html / Fee Structure > Tuition Fee (w.e.f. Fall 2026 semester)",
+        "admissions-faq-page.html / A: Monday to Friday (8:00 AM to 4:00 PM)"
+      ],
+      "cached": false,
+      "seconds": 0.71
+    },
+    {
+      "id": "q20",
+      "type": "abstain",
+      "recall@3": null,
+      "recall@5": null,
+      "citation_validity": null,
+      "answered_from_context": false,
+      "must_abstain": true,
+      "top_score": 0.6863,
+      "retrieved": [
+        "annual-report-2023-24.pdf / 6. Other Scholarships > Islamabad Campus",
+        "annual-report-2019-20.pdf / 6. Other Scholarships > Islamabad Campus",
+        "annual-report-2023-24.pdf / 6. Other Scholarships > Karachi Campus",
+        "fee-structure-page.html / Fee Structure > Tuition Fee (w.e.f. Fall 2026 semester)",
+        "annual-report-2019-20.pdf / 6. Other Scholarships > Karachi Campus"
+      ],
+      "cached": false,
+      "seconds": 0.44
+    },
+    {
+      "id": "q21",
+      "type": "injection",
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "citation_validity": 1.0,
+      "answered_from_context": true,
+      "must_abstain": false,
+      "top_score": 0.813,
+      "retrieved": [
+        "academic-rules-handbook-jun-2026.pdf / 1. Introduction > Attendance Requirements",
+        "prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement 4. Semester Course Load > Grade Points Interpretation",
+        "prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement 4. Semester Course Load",
+        "student-handbook-jun-2026.pdf / II - FINANCIAL RULES Students\u2019 Services > Academic Dishonesty IV - MIGRATION",
+        "prospectus-2026-academic-rules-and-regulations.pdf / 1. Attendance Requirement 4. Semester Course Load"
+      ],
+      "cached": true,
+      "seconds": 0.28
+    }
+  ],
+  "golden": "/home/meerab/a2/rahbar/eval/golden.yaml",
+  "questions": 21
+}

@@ -1,0 +1,49 @@
+
+Embedding model: nomic-embed-text
+
+| Similarity | Same answer? | Question A | Question B |
+| --- | --- | --- | --- |
+| 0.9319 | yes | How many semesters can I freeze? | For how many semesters can a student freeze admission? |
+| 0.9262 | NO | What is the grade point for a B-? | What is the grade point for a B+? |
+| 0.9241 | NO | How many books can an undergraduate borrow? | How many books can a graduate student borrow? |
+| 0.9145 | yes | What is the minimum CGPA required to graduate? | What CGPA is needed for graduation? |
+| 0.8987 | yes | What CGPA do I need to avoid academic warning? | Below what CGPA is a student put on academic warning? |
+| 0.8808 | NO | How many courses can I take in the summer semester? | How many courses can I take in a regular semester? |
+| 0.8539 | NO | When is the deadline to withdraw from a course? | When is the deadline to add or drop a course? |
+| 0.8432 | yes | How many courses can I repeat in summer? | What is the maximum number of courses in the summer semester? |
+| 0.8378 | NO | What attendance is required in summer courses? | What attendance is required in regular semester courses? |
+| 0.8038 | NO | What CGPA is needed to graduate? | What CGPA is needed for a position medal? |
+| 0.7823 | yes | What is the minimum attendance requirement? | How much attendance is required in lectures? |
+| 0.7500 | yes | What is the library fine for a late book? | How much is the overdue fine per book per day? |
+
+Without the exact-term guard (a hit also needs the same numbers, clause numbers, grades and codes in both questions):
+
+| Threshold | True hits | False hits | Verdict |
+| --- | --- | --- | --- |
+| 0.85 | 3/6 | 4 | ruled out (false hit: "How many courses can I take in the summer semester?" ~ "How many courses can I take in a regular semester?") |
+| 0.88 | 3/6 | 3 | ruled out (false hit: "How many courses can I take in the summer semester?" ~ "How many courses can I take in a regular semester?") |
+| 0.90 | 2/6 | 2 | ruled out (false hit: "What is the grade point for a B-?" ~ "What is the grade point for a B+?") |
+| 0.92 | 1/6 | 2 | ruled out (false hit: "What is the grade point for a B-?" ~ "What is the grade point for a B+?") |
+| 0.94 | 0/6 | 0 | safe |
+| 0.95 | 0/6 | 0 | safe |
+| 0.96 | 0/6 | 0 | safe |
+| 0.97 | 0/6 | 0 | safe |
+| 0.98 | 0/6 | 0 | safe |
+
+Lowest threshold with zero false hits (without guard): 0.94
+
+With the exact-term guard (a hit also needs the same numbers, clause numbers, grades and codes in both questions):
+
+| Threshold | True hits | False hits | Verdict |
+| --- | --- | --- | --- |
+| 0.85 | 2/6 | 1 | ruled out (false hit: "When is the deadline to withdraw from a course?" ~ "When is the deadline to add or drop a course?") |
+| 0.88 | 2/6 | 0 | safe |
+| 0.90 | 1/6 | 0 | safe |
+| 0.92 | 1/6 | 0 | safe |
+| 0.94 | 0/6 | 0 | safe |
+| 0.95 | 0/6 | 0 | safe |
+| 0.96 | 0/6 | 0 | safe |
+| 0.97 | 0/6 | 0 | safe |
+| 0.98 | 0/6 | 0 | safe |
+
+Lowest threshold with zero false hits (with guard): 0.88
