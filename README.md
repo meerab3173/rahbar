@@ -133,7 +133,7 @@ Branches: `dev` for work; `main` is protected (pull request, CI green, one appro
 kubeconform -strict) · build · Trivy scan · **e2e-eval** on a kind cluster with the fixture
 corpus and the section 5.4 gate. `cd.yml` (push to main): test → build-push to Docker Hub
 tagged with the commit SHA → deploy to an ephemeral kind cluster, rollout status, smoke
-test through the Ingress. Images: `https://hub.docker.com/u/meerabriaz`.
+test through the Ingress. Images: `https://hub.docker.com/u/meerab3173`.
 
 ## Secrets
 
