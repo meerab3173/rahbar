@@ -84,14 +84,14 @@ questions:
     type: ordinary
     question: Are mobile phones or smart watches allowed in the examination hall?
     relevant:
-      - {source: student-handbook-jun-2026.pdf, section: "Examination Rules"}
+      - {source: student-handbook-jun-2026.pdf, section: ""}   # side-by-side headings: matched at document level (PIPELINE.md)
     expect: "not allowed"
 
   - id: q11
     type: ordinary
     question: How many books can an undergraduate student borrow from the library, and for how long?
     relevant:
-      - {source: student-handbook-jun-2026.pdf, section: "Library Services and Rules"}
+      - {source: student-handbook-jun-2026.pdf, section: "Patron Loan"}   # the loan and fine table, pp. 32-33
     expect: "4"
 
   # --- version-sensitive: the 2025 and 2026 handbooks differ ---------------------------
@@ -135,7 +135,7 @@ questions:
     type: exact
     question: What is the library fine per item per day for an overdue book?
     relevant:
-      - {source: student-handbook-jun-2026.pdf, section: "Library Services and Rules"}
+      - {source: student-handbook-jun-2026.pdf, section: "Patron Loan"}   # the loan and fine table, pp. 32-33
     expect: "10"
 
   - id: q18
