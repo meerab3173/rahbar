@@ -1,17 +1,37 @@
-pod "api-5c99fcdc8b-4ln5v" deleted from rahbar namespace
-pod "api-5c99fcdc8b-7fpnm" deleted from rahbar namespace
-pod "api-5c99fcdc8b-7qpf5" deleted from rahbar namespace
++ kubectl get endpoints api -n rahbar
 Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
-NAME   ENDPOINTS   AGE
-api                14h
+NAME   ENDPOINTS                                                     AGE
+api    10.244.120.106:8000,10.244.120.107:8000,10.244.120.108:8000   15h
+++ kubectl get pods -n rahbar -l app.kubernetes.io/name=api -o name
+++ head -1
+++ cut -d/ -f2
++ kubectl delete pod -n rahbar api-5c99fcdc8b-6gcng --wait=false
+pod "api-5c99fcdc8b-6gcng" deleted from rahbar namespace
++ sleep 2
++ kubectl get endpoints api -n rahbar
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME   ENDPOINTS                                 AGE
+api    10.244.120.107:8000,10.244.120.108:8000   15h
++ make ask 'Q=How many semesters can a student freeze?'
++ grep --color=auto -E '"answer"|answered_from'
+    "answer": "up to 2 semesters",
+    "answered_from_context": true,
++ kubectl delete pod chroma-0 -n rahbar
 pod "chroma-0" deleted from rahbar namespace
++ kubectl wait -n rahbar --for=condition=ready pod/chroma-0 --timeout=180s
 pod/chroma-0 condition met
-Waiting for deployment "api" rollout to finish: 0 of 3 updated replicas are available...
-Waiting for deployment "api" rollout to finish: 0 of 3 updated replicas are available...
-Waiting for deployment "api" rollout to finish: 0 of 3 updated replicas are available...
-Waiting for deployment "api" rollout to finish: 0 of 3 updated replicas are available...
-Waiting for deployment "api" rollout to finish: 1 of 3 updated replicas are available...
-Waiting for deployment "api" rollout to finish: 2 of 3 updated replicas are available...
-deployment "api" successfully rolled out
-Expecting value: line 1 column 1 (char 0)
-make: *** [Makefile:65: ask] Error 1
++ sleep 30
++ kubectl get pods -n rahbar
+NAME                       READY   STATUS      RESTARTS   AGE
+api-5c99fcdc8b-vdw6g       1/1     Running     0          19m
+api-5c99fcdc8b-vz7dn       1/1     Running     0          19m
+api-5c99fcdc8b-zhb8n       1/1     Running     0          36s
+chroma-0                   1/1     Running     0          32s
+indexer-pr77x              0/1     Completed   0          14h
+redis-74cd7b5755-qncmq     1/1     Running     0          15h
+reindex-1794384464-mbpmv   0/1     Completed   0          150m
+ui-85df586949-gsng5        1/1     Running     0          15h
++ make ask 'Q=What CGPA puts a student on academic warning?'
++ grep --color=auto -E '"answer"|answered_from'
+    "answer": "2.00",
+    "answered_from_context": true,
