@@ -1,0 +1,27 @@
++ kubectl -n rahbar set env deployment/api EMBED_MODEL=all-minilm
+deployment.apps/api env updated
++ sleep 40
++ kubectl -n rahbar get pods -l app.kubernetes.io/name=api
+NAME                   READY   STATUS    RESTARTS   AGE
+api-5c99fcdc8b-4ln5v   1/1     Running   0          6m21s
+api-5c99fcdc8b-7fpnm   1/1     Running   0          6m28s
+api-5c99fcdc8b-7qpf5   1/1     Running   0          6m34s
+api-86c9795d-5gzrn     0/1     Running   0          40s
+++ kubectl -n rahbar get pods -l app.kubernetes.io/name=api --sort-by=.metadata.creationTimestamp -o name
+++ tail -1
++ NEW=pod/api-86c9795d-5gzrn
++ kubectl -n rahbar logs pod/api-86c9795d-5gzrn
++ grep --color=auto 'embedding pin'
+{"ts": "2026-11-11T10:15:18Z", "level": "ERROR", "logger": "rahbar.retrieval", "msg": "embedding pin check failed", "request_id": "-", "conflict": "embedding model mismatch: index 'rahbar-v1794388406' was built with 'nomic-embed-text' (dimension 768), but this API has EMBED_MODEL='all-minilm'", "collection": "rahbar-v1794388406", "index_embed_model": "nomic-embed-text", "api_embed_model": "all-minilm"}
++ kubectl -n rahbar describe pod/api-86c9795d-5gzrn
++ grep --color=auto -E 'Readiness probe failed'
++ tail -2
+  Warning  Unhealthy  4s (x5 over 35s)   kubelet            spec.containers{api}: Readiness probe failed: HTTP probe failed with statuscode: 503
++ tail -1
++ kubectl -n rahbar exec pod/api-86c9795d-5gzrn -- python -c 'import urllib.request,json;print(urllib.request.urlopen(urllib.request.Request('\''http://localhost:8000/readyz'\'')).read())'
+command terminated with exit code 1
++ kubectl -n rahbar rollout undo deployment/api
+Warning: resource deployments/api was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/api rolled back
++ kubectl -n rahbar rollout status deployment/api
+deployment "api" successfully rolled out

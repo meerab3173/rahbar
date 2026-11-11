@@ -1,0 +1,15 @@
+.git
+**/__pycache__
+**/*.pyc
+.venv
+venv
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+corpus/raw
+docs
+k8s
+api
+ui
+indexer/tests
+eval/*.json

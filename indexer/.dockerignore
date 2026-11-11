@@ -1,0 +1,8 @@
+# Used only if indexer/ is the build context; the real build uses the repo root,
+# whose .dockerignore is at the top level.
+.git
+__pycache__
+.venv
+venv
+tests
+corpus

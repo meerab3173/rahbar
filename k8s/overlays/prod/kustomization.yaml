@@ -1,0 +1,19 @@
+# A real cluster: images from Docker Hub, pinned to a commit SHA, never :latest.
+# cd.yml rewrites DOCKERHUB_USER and GIT_SHA before applying; to deploy by hand:
+#   cd k8s/overlays/prod && kustomize edit set image \
+#     rahbar-api=<user>/rahbar-api:<sha> rahbar-ui=<user>/rahbar-ui:<sha> \
+#     rahbar-indexer=<user>/rahbar-indexer:<sha>
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+  - {name: rahbar-api, newName: docker.io/DOCKERHUB_USER/rahbar-api, newTag: GIT_SHA}
+  - {name: rahbar-ui, newName: docker.io/DOCKERHUB_USER/rahbar-ui, newTag: GIT_SHA}
+  - {name: rahbar-indexer, newName: docker.io/DOCKERHUB_USER/rahbar-indexer, newTag: GIT_SHA}
+patches:
+  - target: {kind: Deployment, name: api}
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/imagePullPolicy
+        value: Always

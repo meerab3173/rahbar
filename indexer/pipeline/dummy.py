@@ -44,10 +44,11 @@ def fake_vector(text: str, dim: int = DUMMY_DIM) -> list[float]:
 
 def write_dummy_index(settings: IndexerSettings, client: Any) -> int:
     """Rebuild the collection with the three dummy chunks. Safe to run twice."""
-    try:
-        client.delete_collection(settings.collection)
-    except Exception:  # the collection did not exist yet
-        pass
+    for name in (settings.collection, settings.collection + "-active"):
+        try:   # the -active pointer too, so the API reads this collection directly
+            client.delete_collection(name)
+        except Exception:  # the collection did not exist yet
+            pass
     collection = client.create_collection(
         name=settings.collection,
         metadata={"hnsw:space": "cosine", "embed_model": DUMMY_MODEL, "dimension": DUMMY_DIM},

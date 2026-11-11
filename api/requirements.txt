@@ -1,7 +1,12 @@
 # Pinned: an unpinned dependency is the drift problem from Lecture 04.
-fastapi==0.115.12
+# Freeze the resolved set with `pip freeze > requirements.lock` once CI is green.
+# Security floors (>=) sit where the starter's exact pins carried HIGH CVEs with a fix
+# available, which Trivy (section 6) fails on: starlette < 0.49.1, h11 < 0.16.
+fastapi>=0.120.0,<1.0
+starlette>=0.49.1
 uvicorn==0.34.2
-pydantic==2.11.4
+h11>=0.16.0
+pydantic>=2.11.4,<3
 httpx==0.28.1
 prometheus-client==0.21.1
 # Thin HTTP client for the Chroma server. Run the chromadb/chroma image with the SAME

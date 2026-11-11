@@ -1,0 +1,141 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [dev]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.12"
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ env.PYTHON_VERSION }}", cache: pip}
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - name: ruff
+        run: ruff check api indexer eval corpus
+      - name: mypy
+        run: |
+          cd api && mypy app
+          cd ../indexer && mypy pipeline
+
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ env.PYTHON_VERSION }}", cache: pip}
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - name: system packages for the OCR tests
+        run: sudo apt-get update -q && sudo apt-get install -y -q poppler-utils tesseract-ocr
+      - name: pytest api (stub provider, no network, coverage >= 60%)
+        run: cd api && pytest -q --cov=app --cov-report=term-missing --cov-fail-under=60
+      - name: pytest indexer
+        run: cd indexer && pytest -q --cov=pipeline --cov-report=term-missing
+
+  manifests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: install kubeconform
+        run: |
+          curl -sSL https://github.com/yannh/kubeconform/releases/download/v0.6.7/kubeconform-linux-amd64.tar.gz | tar xz
+          sudo mv kubeconform /usr/local/bin/
+      - name: kustomize build | kubeconform -strict (every overlay)
+        run: |
+          for overlay in prod dev ci; do
+            echo "== $overlay"
+            kubectl kustomize k8s/overlays/$overlay | kubeconform -strict -summary -kubernetes-version 1.30.0
+          done
+
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: build api, ui, indexer (not pushed on a pull request)
+        run: |
+          docker build -t rahbar-api:ci api
+          docker build -t rahbar-ui:ci ui
+          docker build -t rahbar-indexer:ci -f indexer/Dockerfile .
+          mkdir -p /tmp/images
+          for i in rahbar-api rahbar-ui rahbar-indexer; do docker save $i:ci -o /tmp/images/$i.tar; done
+      - uses: actions/upload-artifact@v4
+        with: {name: images, path: /tmp/images, retention-days: 1}
+
+  scan:
+    needs: build
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [rahbar-api, rahbar-ui, rahbar-indexer]
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {name: images, path: /tmp/images}
+      # Trivy from its pinned image (not a moving action tag): fail on HIGH or CRITICAL
+      # findings that have a fix available.
+      - name: trivy
+        run: |
+          docker run --rm -v /tmp/images:/images aquasec/trivy:0.57.1 image \
+            --input /images/${{ matrix.image }}.tar \
+            --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 --no-progress
+
+  e2e-eval:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ env.PYTHON_VERSION }}"}
+      - uses: actions/download-artifact@v4
+        with: {name: images, path: /tmp/images}
+      - run: for f in /tmp/images/*.tar; do docker load -i "$f"; done
+      - name: create a kind cluster
+        uses: helm/kind-action@v1.10.0
+        with: {cluster_name: rahbar}
+      - name: load images into kind
+        run: |
+          for i in rahbar-api rahbar-ui rahbar-indexer; do kind load docker-image $i:ci --name rahbar; done
+      - name: apply the manifests
+        run: kubectl apply -k k8s/overlays/ci
+      - name: wait for chroma and redis
+        run: |
+          kubectl -n rahbar rollout status statefulset/chroma --timeout=240s
+          kubectl -n rahbar rollout status deployment/redis --timeout=180s
+      - name: run the indexer Job on the fixture corpus
+        run: kubectl -n rahbar wait --for=condition=complete job/indexer --timeout=300s
+      - name: wait for the api rollout (readiness needs a non-empty, matching index)
+        run: kubectl -n rahbar rollout status deployment/api --timeout=240s
+      - name: eval/run_eval.py and the section 5.4 gate
+        run: |
+          pip install httpx==0.28.1 pyyaml==6.0.2
+          kubectl -n rahbar port-forward svc/api 8000:8000 >/tmp/pf.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf localhost:8000/readyz && break; sleep 2; done
+          python eval/run_eval.py --api http://localhost:8000 \
+            --golden eval/fixtures/golden.fixture.yaml \
+            --baseline eval/fixtures/baseline.fixture.json \
+            --out /tmp/fixture-results.json
+      - name: diagnose (status, then events, then logs)
+        if: failure()
+        run: |
+          kubectl -n rahbar get pods -o wide
+          kubectl -n rahbar describe pods | tail -n 120
+          kubectl -n rahbar logs job/indexer --all-containers --tail=100 || true
+          kubectl -n rahbar logs deployment/api --tail=100 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: fixture-results, path: /tmp/fixture-results.json, if-no-files-found: ignore}

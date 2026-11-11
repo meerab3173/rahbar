@@ -1,0 +1,46 @@
+# One ConfigMap read by BOTH the api and the indexer (envFrom). EMBED_MODEL lives here
+# exactly once: that is the pin (section 4.4). Changing a value here and restarting is a
+# configuration change, not a rebuild.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rahbar-config
+  namespace: rahbar
+  labels:
+    app.kubernetes.io/part-of: rahbar
+data:
+  # --- implementations ---
+  RETRIEVER: "chroma"
+  LLM_PROVIDER: "ollama-host"            # ollama-host | ollama-incluster | hosted | stub
+  LLM_MODEL: "llama3.2:3b"
+  OLLAMA_URL: "http://host.minikube.internal:11434"
+  HOSTED_BASE_URL: ""                    # e.g. https://api.groq.com/openai/v1 (key in rahbar-secret)
+  LLM_TIMEOUT: "240"
+  # --- the embedding pin: the indexer writes it into the collection, the api checks it ---
+  EMBED_MODEL: "nomic-embed-text"
+  # --- vector store ---
+  CHROMA_HOST: "chroma"
+  CHROMA_PORT: "8000"
+  CHROMA_COLLECTION: "rahbar"
+  # --- indexing (tokens = whitespace words; measured in docs/PIPELINE.md) ---
+  CHUNK_SIZE: "200"
+  CHUNK_OVERLAP: "30"
+  CHUNK_STRATEGY: "structure"
+  OCR: "true"
+  CORPUS_SOURCE: "fetch"                 # fetch | fixtures
+  CORPUS_DIR: "/corpus"
+  # --- retrieval ---
+  TOP_K: "5"
+  RELEVANCE_FLOOR: "0.69"                # top similarity below this => abstain (PIPELINE.md)
+  HYBRID_WEIGHT: "0.15"                  # exact-term boost in the rerank; 0 turns it off
+  CANDIDATES: "4"
+  # --- generation ---
+  # 0.1: facts and JSON want near-determinism; not 0, so the one retry can differ.
+  TEMPERATURE: "0.1"
+  # --- semantic cache ---
+  CACHE_BACKEND: "redis"
+  REDIS_URL: "redis://redis:6379/0"
+  CACHE_THRESHOLD: "0.88"                # lowest value with zero false hits (PIPELINE.md)
+  CACHE_TTL_SECONDS: "86400"
+  CACHE_MAX_ENTRIES: "200"
+  LOG_LEVEL: "INFO"

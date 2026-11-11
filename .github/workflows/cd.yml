@@ -1,0 +1,113 @@
+name: cd
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cd-main
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r api/requirements-dev.txt -r indexer/requirements-dev.txt
+      - name: system packages for the OCR tests
+        run: sudo apt-get update -q && sudo apt-get install -y -q poppler-utils tesseract-ocr
+      - run: cd api && pytest -q --cov=app --cov-fail-under=60
+      - run: cd indexer && pytest -q
+
+  build-push:
+    needs: test            # never publish an image built from code that failed its tests
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        include:
+          - {image: rahbar-api, context: api, file: api/Dockerfile}
+          - {image: rahbar-ui, context: ui, file: ui/Dockerfile}
+          - {image: rahbar-indexer, context: ., file: indexer/Dockerfile}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}     # an access token, never the password
+      - uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          file: ${{ matrix.file }}
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.image }}:${{ github.sha }}
+
+  deploy:
+    needs: build-push      # deploy only what was tested and published, by commit SHA
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      REGISTRY_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+      SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: ephemeral cluster with an ingress port
+        uses: helm/kind-action@v1.10.0
+        with: {cluster_name: rahbar, config: .github/kind-ingress.yaml}
+      - name: ingress-nginx for kind
+        run: |
+          kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
+          kubectl wait -n ingress-nginx --for=condition=ready pod \
+            --selector=app.kubernetes.io/component=controller --timeout=240s
+      - name: pull the published images by SHA and load them
+        run: |
+          for i in rahbar-api rahbar-ui rahbar-indexer; do
+            docker pull "$REGISTRY_USER/$i:$SHA"
+            kind load docker-image "$REGISTRY_USER/$i:$SHA" --name rahbar
+          done
+      - name: overlay pinned to this commit (never :latest)
+        run: |
+          mkdir -p k8s/overlays/cd
+          cat > k8s/overlays/cd/kustomization.yaml <<YAML
+          apiVersion: kustomize.config.k8s.io/v1beta1
+          kind: Kustomization
+          resources: [../ci]
+          images:
+            - {name: rahbar-api, newName: $REGISTRY_USER/rahbar-api, newTag: "$SHA"}
+            - {name: rahbar-ui, newName: $REGISTRY_USER/rahbar-ui, newTag: "$SHA"}
+            - {name: rahbar-indexer, newName: $REGISTRY_USER/rahbar-indexer, newTag: "$SHA"}
+          YAML
+          kubectl kustomize k8s/overlays/cd | grep "image:" | sort -u
+      - name: apply, index, roll out
+        run: |
+          kubectl apply -k k8s/overlays/cd
+          kubectl -n rahbar rollout status statefulset/chroma --timeout=240s
+          kubectl -n rahbar wait --for=condition=complete job/indexer --timeout=300s
+          kubectl -n rahbar rollout status deployment/api --timeout=240s
+          kubectl -n rahbar rollout status deployment/ui --timeout=120s
+      - name: smoke test through the Ingress
+        run: |
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -H 'Host: rahbar.local' http://localhost/) && [ "$code" = 200 ] && break
+            sleep 3
+          done
+          curl -sf -H 'Host: rahbar.local' http://localhost/ | grep -qi rahbar
+          answer=$(curl -sf -X POST -H 'Host: rahbar.local' -H 'Content-Type: application/json' \
+            -d '{"question":"When is a student placed on academic warning?"}' http://localhost/api/ask)
+          echo "$answer"
+          echo "$answer" | python3 -c 'import json,sys; r=json.load(sys.stdin); assert r["answered_from_context"] and r["citations"], r'
+          abstain=$(curl -sf -X POST -H 'Host: rahbar.local' -H 'Content-Type: application/json' \
+            -d '{"question":"How do I apply for a hostel room?"}' http://localhost/api/ask)
+          echo "$abstain" | python3 -c 'import json,sys; r=json.load(sys.stdin); assert r["answered_from_context"] is False, r'
+          echo "deployed $SHA"
+      - name: diagnose
+        if: failure()
+        run: |
+          kubectl -n rahbar get pods -o wide
+          kubectl -n rahbar describe pods | tail -n 120
+          kubectl -n rahbar logs deployment/api --tail=100 || true

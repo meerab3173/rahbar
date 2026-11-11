@@ -1,0 +1,10 @@
+# Local minikube: images built on the laptop and loaded with `make images`
+# (imagePullPolicy IfNotPresent), Ollama on the host, the real FAST-NUCES corpus.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+images:
+  - {name: rahbar-api, newTag: dev}
+  - {name: rahbar-ui, newTag: dev}
+  - {name: rahbar-indexer, newTag: dev}

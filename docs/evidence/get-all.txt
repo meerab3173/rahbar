@@ -1,0 +1,61 @@
+NAME                           READY   STATUS      RESTARTS   AGE
+pod/api-5c99fcdc8b-4ln5v       1/1     Running     0          8m35s
+pod/api-5c99fcdc8b-7fpnm       1/1     Running     0          8m42s
+pod/api-5c99fcdc8b-7qpf5       1/1     Running     0          8m48s
+pod/chroma-0                   1/1     Running     0          14h
+pod/indexer-pr77x              0/1     Completed   0          14h
+pod/redis-74cd7b5755-qncmq     1/1     Running     0          14h
+pod/reindex-1794384464-mbpmv   0/1     Completed   0          130m
+pod/ui-85df586949-gsng5        1/1     Running     0          14h
+
+NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/api               ClusterIP   10.104.92.205   <none>        8000/TCP   14h
+service/chroma            ClusterIP   10.99.28.31     <none>        8000/TCP   14h
+service/chroma-headless   ClusterIP   None            <none>        8000/TCP   14h
+service/redis             ClusterIP   10.103.143.3    <none>        6379/TCP   14h
+service/ui                ClusterIP   10.100.30.122   <none>        8080/TCP   14h
+
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/api     3/3     3            3           14h
+deployment.apps/redis   1/1     1            1           14h
+deployment.apps/ui      1/1     1            1           14h
+
+NAME                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/api-57ddf65f9d     0         0         0       14h
+replicaset.apps/api-5c99fcdc8b     3         3         3       57m
+replicaset.apps/api-658fd7d9d6     0         0         0       14h
+replicaset.apps/api-6c99d94f5c     0         0         0       131m
+replicaset.apps/api-6cb8bfb987     0         0         0       9m10s
+replicaset.apps/api-86c9795d       0         0         0       18m
+replicaset.apps/redis-74cd7b5755   1         1         1       14h
+replicaset.apps/ui-85df586949      1         1         1       14h
+
+NAME                      READY   AGE
+statefulset.apps/chroma   1/1     14h
+
+NAME                                      REFERENCE        TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/api   Deployment/api   cpu: 4%/70%   3         8         3          14h
+
+NAME                    SCHEDULE    TIMEZONE       SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/reindex   0 3 * * 0   Asia/Karachi   False     0        <none>          14h
+
+NAME                           STATUS     COMPLETIONS   DURATION   AGE
+job.batch/indexer              Complete   1/1           6m26s      14h
+job.batch/reindex-1794384464   Failed     1/1           130m       130m
+
+NAME                                  STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/data-chroma-0   Bound    pvc-4d576d8c-7d1d-484e-bc68-e9b18a777723   2Gi        RWO            standard       <unset>                 14h
+persistentvolumeclaim/redis-data      Bound    pvc-67339acf-48e1-4336-8dfe-f62a2328d35e   1Gi        RWO            standard       <unset>                 14h
+
+NAME                               CLASS   HOSTS          ADDRESS        PORTS   AGE
+ingress.networking.k8s.io/rahbar   nginx   rahbar.local   192.168.49.2   80      14h
+
+NAME                                               POD-SELECTOR                     AGE
+networkpolicy.networking.k8s.io/allow-dns          <none>                           14h
+networkpolicy.networking.k8s.io/api-egress         app.kubernetes.io/name=api       14h
+networkpolicy.networking.k8s.io/api-ingress        app.kubernetes.io/name=api       14h
+networkpolicy.networking.k8s.io/chroma-ingress     app.kubernetes.io/name=chroma    14h
+networkpolicy.networking.k8s.io/default-deny-all   <none>                           14h
+networkpolicy.networking.k8s.io/indexer-egress     app.kubernetes.io/name=indexer   14h
+networkpolicy.networking.k8s.io/redis-ingress      app.kubernetes.io/name=redis     14h
+networkpolicy.networking.k8s.io/ui-ingress         app.kubernetes.io/name=ui        14h

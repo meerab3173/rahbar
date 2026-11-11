@@ -1,0 +1,82 @@
+# The indexer is a Job, the only writer to Chroma (ADR 0001). It runs once and exits;
+# the api never indexes. Re-index with no redeploy:
+#   kubectl create job --from=cronjob/reindex manual-reindex-1 -n rahbar
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: indexer
+  namespace: rahbar
+  labels: {app.kubernetes.io/name: indexer, app.kubernetes.io/part-of: rahbar}
+spec:
+  backoffLimit: 3
+  activeDeadlineSeconds: 3600
+  template:
+    metadata:
+      labels: {app.kubernetes.io/name: indexer, app.kubernetes.io/part-of: rahbar}
+    spec:
+      serviceAccountName: indexer
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      restartPolicy: OnFailure
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      initContainers:
+        # Downloads corpus/sources.yaml into the emptyDir (or does nothing when
+        # CORPUS_SOURCE=fixtures). Re-fetching on every run is how a weekly re-index
+        # picks up a document the university re-published.
+        - name: fetch-corpus
+          image: rahbar-indexer:dev
+          imagePullPolicy: IfNotPresent
+          command: ["sh", "/app/fetch-corpus.sh"]
+          envFrom:
+            - configMapRef: {name: rahbar-config}
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - {name: corpus, mountPath: /corpus}
+            - {name: tmp, mountPath: /tmp}
+      containers:
+        - name: indexer
+          image: rahbar-indexer:dev
+          imagePullPolicy: IfNotPresent
+          command: ["python", "-m", "pipeline.run"]
+          envFrom:
+            - configMapRef: {name: rahbar-config}
+          # Embedding and OCR hold far more memory than serving. Limit from the peak in
+          # `kubectl top pods` during a real run (docs/evidence/kubectl-top.txt, Q4).
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "2"
+              memory: 1536Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+          volumeMounts:
+            - {name: corpus, mountPath: /corpus}
+            - {name: tmp, mountPath: /tmp}
+      volumes:
+        - name: corpus
+          emptyDir: {sizeLimit: 512Mi}
+        - name: tmp
+          emptyDir: {sizeLimit: 512Mi}
