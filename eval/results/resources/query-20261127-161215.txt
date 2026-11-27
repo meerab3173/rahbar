@@ -1,0 +1,7 @@
+RESOURCES  query  (135 samples, every 5 s)
+container      cpu median  cpu peak  mem median  mem peak
+api                   17m       18m       94Mi      94Mi
+chroma                11m       12m      117Mi     117Mi
+redis                 17m       34m       13Mi      13Mi
+shell                  0m        0m        0Mi       0Mi
+ui                     1m        2m        2Mi       2Mi

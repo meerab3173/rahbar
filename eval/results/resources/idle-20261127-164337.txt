@@ -1,0 +1,7 @@
+RESOURCES  idle  (65 samples, every 5 s)
+container      cpu median  cpu peak  mem median  mem peak
+api                   18m       18m       93Mi      93Mi
+chroma                18m       18m      117Mi     117Mi
+redis                 23m       24m       17Mi      18Mi
+shell                  0m        0m        0Mi       0Mi
+ui                     2m        2m        2Mi       2Mi
