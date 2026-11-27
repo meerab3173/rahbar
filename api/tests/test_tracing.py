@@ -148,3 +148,21 @@ def test_stdout_line_is_json(tmp_path: Path, capsys) -> None:  # type: ignore[no
     line = capsys.readouterr().err.strip().splitlines()[-1]
     record = json.loads(line)
     assert record["logger"] == "rahbar.trace" and record["trace"] == {"trace_id": "x"}
+
+
+class _SlowRedis(FakeRedis):
+    def hgetall(self, key: str) -> dict[str, str]:
+        raise TimeoutError("Timeout reading from socket")
+
+
+def test_a_timed_out_cache_is_a_miss_not_a_failed_question(tmp_path: Path) -> None:
+    p = Pipeline(settings=Settings(relevance_floor=0.5), retriever=FakeRetriever([ATTENDANCE]),
+                 provider=ScriptedProvider([answer_json()]), embedder=FakeEmbedder(),
+                 cache=SemanticCache(_SlowRedis(), threshold=0.95, ttl_seconds=60,
+                                     max_entries=50),
+                 tracer=TraceSink(str(tmp_path), stdout=False))
+    resp = ask(p, "What attendance is required?", "t-slow")
+    assert resp.answered_from_context
+    [t] = traces(tmp_path)
+    assert {"rail": "cache", "action": "degraded",
+            "error": "TimeoutError: Timeout reading from socket"} in t["guardrails"]

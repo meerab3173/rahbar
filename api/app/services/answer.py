@@ -147,9 +147,19 @@ def _answer(request: AskRequest, pipe: Pipeline, trace: dict[str, Any]) -> AskRe
         if pipe.cache is not None and not cacheable_query:
             tracing.rail("cache_bypass", "skipped",
                          reason="follow-up" if followup else "older version asked")
+        hit, similarity = None, 0.0
         if cacheable_query and pipe.cache is not None and vector is not None:
-            with tracing.stage("cache_lookup"):
-                hit, similarity = pipe.cache.lookup(generation, vector, question)
+            try:
+                with tracing.stage("cache_lookup"):
+                    hit, similarity = pipe.cache.lookup(generation, vector, question)
+            except Exception as exc:
+                # The cache is an optimisation: a slow or unreachable Redis is a miss,
+                # never a failed question (found from a trace: Redis timed out at 2 s).
+                cacheable_query = False
+                log.warning("cache lookup failed; answering without the cache",
+                            extra={"error": f"{type(exc).__name__}: {exc}"})
+                tracing.rail("cache", "degraded", error=f"{type(exc).__name__}: {exc}")
+        if cacheable_query and pipe.cache is not None and vector is not None:
             record_cache(hit is not None)
             trace["cache"] = {"hit": hit is not None, "similarity": round(similarity, 4),
                               "threshold": settings.cache_threshold}
