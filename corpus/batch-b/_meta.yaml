@@ -1,0 +1,6 @@
+# Metadata for files that cannot carry front matter (the ingestion Job reads this
+# sidecar: file name -> fields). Markdown files carry their own front matter.
+b07-lab-safety-rules.pdf:
+  title: Laboratory Safety Rules
+  doc_id: lab-safety-rules
+  doc_version: "2026-09"
