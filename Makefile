@@ -13,7 +13,7 @@ HOST ?= rahbar.local
 
 .DEFAULT_GOAL := help
 
-.PHONY: rollout-demo ingest batch lake-status lake-report restore release delete-doc lake-pull
+.PHONY: rollout-demo ingest batch lake-status lake-report restore release delete-doc lake-pull trace traces trace-summary trace-logs traces-pull metrics
 .PHONY: help install test lint dev cluster images apply secret index ask fetch eval eval-fixtures check tune cache-threshold sections evidence demo-pin
 
 help: ## list the targets
@@ -149,3 +149,29 @@ lake-pull: ## copy the data lake's reports and catalog into eval/results/datalak
 	kubectl -n $(NS) cp "$(SHELL_POD):/datalake/reports" eval/results/datalake/reports
 	kubectl -n $(NS) cp "$(SHELL_POD):/datalake/state/catalog.json" eval/results/datalake/catalog.json
 	ls eval/results/datalake/reports | tail -6
+
+# --- Assignment 03, Part D: traces (docs/OBSERVABILITY.md) ---------------------------------------
+API_POD = $$(kubectl -n $(NS) get pod -l app.kubernetes.io/name=api -o jsonpath='{.items[0].metadata.name}')
+TRACETOOL = kubectl -n $(NS) exec deploy/api -- python -m app.tracetool
+
+traces: ## the latest traces, one line each: make traces N=20
+	$(TRACETOOL) list -n $${N:-20}
+
+trace: ## D2: the full trace and the exact prompt for one id: make trace ID=<trace id>
+	@test -n "$(ID)" || { echo "usage: make trace ID=<trace id (or its first characters)>"; exit 1; }
+	$(TRACETOOL) show "$(ID)"
+
+trace-summary: ## D3: metrics over a time window from the trace log: make trace-summary SINCE=2h
+	$(TRACETOOL) summary $${SINCE:+--since $$SINCE}
+
+trace-logs: ## F4: trace records on standard output, read with kubectl logs
+	kubectl -n $(NS) logs deploy/api --tail=$${N:-200} | grep '"rahbar.trace"'
+
+traces-pull: ## copy the trace volume into traces/ (commit samples for the report)
+	mkdir -p traces
+	kubectl -n $(NS) cp "$(API_POD):/traces/." traces/
+	ls traces | head
+
+metrics: ## F4: the metrics endpoint through kubectl port-forward (Ctrl+C to stop)
+	@echo "port-forwarding svc/api to localhost:9000; in another window: curl -s localhost:9000/metrics | grep rahbar_"
+	kubectl -n $(NS) port-forward svc/api 9000:8000
