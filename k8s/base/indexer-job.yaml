@@ -1,6 +1,8 @@
-# The indexer is a Job, the only writer to Chroma (ADR 0001). It runs once and exits;
-# the api never indexes. Re-index with no redeploy:
-#   kubectl create job --from=cronjob/reindex manual-reindex-1 -n rahbar
+# The ingestion Job (Assignment 03, Part A and F2): ingest -> verify -> update the data
+# lake -> update the retrieval sources, then exit. It is the only writer to Chroma
+# (ADR 0001); the api never indexes. Its state lives on the datalake PVC, so a re-run on
+# an unchanged corpus embeds nothing. Run it again with no redeploy:
+#   kubectl create job --from=cronjob/reindex ingest-$(date +%s) -n rahbar     (make ingest)
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -25,9 +27,9 @@ spec:
         fsGroup: 10001
         seccompProfile: {type: RuntimeDefault}
       initContainers:
-        # Downloads corpus/sources.yaml into the emptyDir (or does nothing when
-        # CORPUS_SOURCE=fixtures). Re-fetching on every run is how a weekly re-index
-        # picks up a document the university re-published.
+        # Downloads corpus/sources.yaml into /datalake/sources (or does nothing when
+        # CORPUS_SOURCE=fixtures). Files already downloaded are kept on the PVC; the
+        # verification stage decides what changed.
         - name: fetch-corpus
           image: rahbar-indexer:dev
           imagePullPolicy: IfNotPresent
@@ -48,7 +50,7 @@ spec:
               drop:
                 - ALL
           volumeMounts:
-            - {name: corpus, mountPath: /corpus}
+            - {name: datalake, mountPath: /datalake}
             - {name: tmp, mountPath: /tmp}
       containers:
         - name: indexer
@@ -73,10 +75,10 @@ spec:
               drop:
                 - ALL
           volumeMounts:
-            - {name: corpus, mountPath: /corpus}
+            - {name: datalake, mountPath: /datalake}
             - {name: tmp, mountPath: /tmp}
       volumes:
-        - name: corpus
-          emptyDir: {sizeLimit: 512Mi}
+        - name: datalake
+          persistentVolumeClaim: {claimName: datalake}
         - name: tmp
           emptyDir: {sizeLimit: 512Mi}

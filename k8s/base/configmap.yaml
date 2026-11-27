@@ -28,7 +28,13 @@ data:
   CHUNK_STRATEGY: "structure"
   OCR: "true"
   CORPUS_SOURCE: "fetch"                 # fetch | fixtures
-  CORPUS_DIR: "/corpus"
+  CORPUS_DIR: "/datalake/sources"        # the fetch cache, on the data-lake PVC
+  # --- data lake and verification (Assignment 03, Part A; docs/DATA-LAKE.md) ---
+  DATALAKE_DIR: "/datalake"              # PVC datalake: inbox, lake, archive, quarantine
+  INDEX_ACTIVATE: "true"                 # flip the api's pointer after a run
+  MIN_TEXT_CHARS: "200"                  # quality: less extracted text = empty
+  MAX_GARBLED_RATIO: "0.10"              # quality: more unreadable characters = garbled
+  NEAR_DUP_THRESHOLD: "0.95"             # uniqueness: fingerprint cosine (measured)
   # --- retrieval ---
   TOP_K: "5"
   RELEVANCE_FLOOR: "0.69"                # top similarity below this => abstain (PIPELINE.md)

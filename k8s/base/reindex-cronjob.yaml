@@ -1,4 +1,5 @@
-# Weekly re-index: the same image, command and pod spec as the indexer Job.
+# Weekly re-run of the ingestion Job (F2): the same image, command and pod spec. The
+# incremental update makes a weekly run cheap: unchanged documents embed nothing.
 apiVersion: batch/v1
 kind: CronJob
 metadata:
@@ -30,9 +31,9 @@ spec:
             fsGroup: 10001
             seccompProfile: {type: RuntimeDefault}
           initContainers:
-            # Downloads corpus/sources.yaml into the emptyDir (or does nothing when
-            # CORPUS_SOURCE=fixtures). Re-fetching on every run is how a weekly re-index
-            # picks up a document the university re-published.
+            # Downloads corpus/sources.yaml into /datalake/sources (or does nothing when
+            # CORPUS_SOURCE=fixtures). Files already downloaded are kept on the PVC; the
+            # verification stage decides what changed.
             - name: fetch-corpus
               image: rahbar-indexer:dev
               imagePullPolicy: IfNotPresent
@@ -53,7 +54,7 @@ spec:
                   drop:
                     - ALL
               volumeMounts:
-                - {name: corpus, mountPath: /corpus}
+                - {name: datalake, mountPath: /datalake}
                 - {name: tmp, mountPath: /tmp}
           containers:
             - name: indexer
@@ -78,10 +79,10 @@ spec:
                   drop:
                     - ALL
               volumeMounts:
-                - {name: corpus, mountPath: /corpus}
+                - {name: datalake, mountPath: /datalake}
                 - {name: tmp, mountPath: /tmp}
           volumes:
-            - name: corpus
-              emptyDir: {sizeLimit: 512Mi}
+            - name: datalake
+              persistentVolumeClaim: {claimName: datalake}
             - name: tmp
               emptyDir: {sizeLimit: 512Mi}

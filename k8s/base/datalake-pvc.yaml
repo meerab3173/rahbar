@@ -1,0 +1,15 @@
+# The data lake (Assignment 03, F1): the fetched corpus, the inbox for new batches,
+# the verified documents, archived versions, quarantine, the catalog and the reports.
+# On a PersistentVolumeClaim so all of it survives pod restarts and Job re-runs.
+# Only the ingestion Job (and the datalake-shell pod, which has no network) mount it.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: datalake
+  namespace: rahbar
+  labels: {app.kubernetes.io/name: datalake, app.kubernetes.io/part-of: rahbar}
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
