@@ -1,0 +1,26 @@
+# Local minikube on an 8 GB laptop (Ammn's): the dev overlay, with one api pod instead of
+# three and a longer LLM timeout, because llama3.2:3b on a 1.4 GHz CPU needs more than
+# 240 s for its first answer after loading (measured: 2 min 26 s just to load the model).
+#   minikube start --driver=docker --cni=calico --memory=3584 --cpus=4
+#   kubectl apply -k k8s/overlays/lite
+# Every other object, probe, policy and value is the dev overlay's.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../dev
+patches:
+  - target: {kind: Deployment, name: api}
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 1
+  - target: {kind: HorizontalPodAutoscaler, name: api}
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 1
+  - target: {kind: ConfigMap, name: rahbar-config}
+    patch: |-
+      - op: replace
+        path: /data/LLM_TIMEOUT
+        value: "600"
