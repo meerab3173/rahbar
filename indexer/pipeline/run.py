@@ -288,8 +288,12 @@ def ingest(settings: IndexerSettings, client: Any = None,
     # 1. ingest
     requests = apply_requests(lake, catalog)
     known = dict(catalog.entries)
-    inputs = source_inputs(settings.corpus_dir) + lake_inputs(lake, catalog) + \
-        inbox_inputs(lake)
+    new_batches = inbox_inputs(lake)
+    # A document dropped into the inbox again under the same doc_id and version is a
+    # changed (or re-sent) copy of the one in the lake: it replaces it, not duplicates it.
+    resent = {i.doc_key for i in new_batches}
+    inputs = source_inputs(settings.corpus_dir) + \
+        [i for i in lake_inputs(lake, catalog) if i.doc_key not in resent] + new_batches
     skipped = []
     for inp in list(inputs):
         if catalog.deleted.get(inp.doc_key) == inp.sha256:

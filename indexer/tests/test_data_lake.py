@@ -309,6 +309,27 @@ def test_delete_request_removes_a_batch_document(world) -> None:  # type: ignore
     assert third["chunks"]["deleted"] == first["counts_by_doc_id"]["id-card-rules"]
 
 
+def test_changed_batch_document_replaces_only_its_own_chunks(world) -> None:  # type: ignore[no-untyped-def]
+    s, client = world
+    drop(s, "b", "id-card.md",
+         md("ID card rules", "2026", "# ID card rules\n\n" + GOOD_TEXT * 4, "id-card-rules"))
+    first, _ = run(s, client)
+    col = client.cols[s.collection_name]
+    others = {i: v for i, v in col.rows.items() if v[2]["doc_id"] != "id-card-rules"}
+    drop(s, "b-update", "id-card.md",
+         md("ID card rules", "2026", "# ID card rules\n\n" + GOOD_TEXT * 4 +
+            "\n\n## Replacement fee\n\nA replacement card costs Rs 1,000.\n", "id-card-rules"))
+    second, _ = run(s, client)
+    rep = verify_report(s, second["run_id"])
+    assert checks(rep, "id-card.md")["uniqueness"]["result"] == "pass"
+    assert second["per_document"]["id-card-rules@2026"].startswith("replaced")
+    assert second["chunks"]["deleted"] == first["counts_by_doc_id"]["id-card-rules"]
+    assert {i: v for i, v in col.rows.items() if v[2]["doc_id"] != "id-card-rules"} == others
+    lake = Path(s.datalake_dir)
+    copies = list((lake / "lake" / "id-card-rules").rglob("*.md"))
+    assert len(copies) == 1 and "Replacement fee" in copies[0].read_text()
+
+
 def test_derive_doc_id_drops_the_version() -> None:
     assert derive_doc_id("academic-rules-2023.md", "2023") == "academic-rules"
     assert derive_doc_id("Notice.PDF", "") == "notice"
