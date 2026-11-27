@@ -26,6 +26,7 @@ spec:
         runAsNonRoot: true
         runAsUser: 10001
         runAsGroup: 10001
+        fsGroup: 10001            # the traces volume is writable by the non-root user
         seccompProfile: {type: RuntimeDefault}
       containers:
         - name: api
@@ -73,6 +74,9 @@ spec:
                 - ALL
           volumeMounts:
             - {name: tmp, mountPath: /tmp}
+            - {name: traces, mountPath: /traces}   # Part D/F4: trace records + prompts
       volumes:
         - name: tmp
           emptyDir: {sizeLimit: 64Mi}
+        - name: traces
+          persistentVolumeClaim: {claimName: traces}

@@ -1,0 +1,17 @@
+# Trace records (Assignment 03, D1 and F4): every api pod appends one JSON line per query
+# to /traces/traces-<pod>.jsonl and stores each exact prompt once under /traces/prompts/.
+# The same records also go to stdout (kubectl logs). On a PVC so the report scripts
+# (python -m app.tracetool summary) and the trace tool still work after a pod restart.
+# One node (minikube, kind): ReadWriteOnce is shared by every api pod on it. On a
+# multi-node cluster this would need ReadWriteMany, or a log shipper instead.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: traces
+  namespace: rahbar
+  labels: {app.kubernetes.io/name: traces, app.kubernetes.io/part-of: rahbar}
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
