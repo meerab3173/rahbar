@@ -1,0 +1,68 @@
+VERIFICATION REPORT  run 20261127-143239-907
+thresholds: min_text_chars=200  max_garbled_ratio=0.1  near_dup_threshold=0.95  (nomic-embed-text)
+
+academic-rules-handbook-jun-2025.pdf  [sources]  ->  ARCHIVED
+    quality      PASS  126,492 characters, 0.00% unreadable
+    completeness PASS  title, version 2025-06, 54 page(s); not truncated
+    recency      FAIL  newer version academic-rules-handbook@2026-06 exists
+    uniqueness   PASS  no exact or near duplicate
+    now at       archive/academic-rules-handbook/2025-06/academic-rules-handbook-jun-2025.pdf
+
+academic-rules-handbook-jun-2026.pdf  [sources]  ->  ACTIVE
+    quality      PASS  96,614 characters, 0.00% unreadable
+    completeness PASS  title, version 2026-06, 57 page(s); not truncated
+    recency      PASS  latest of 2 versions of academic-rules-handbook
+    uniqueness   PASS  no exact or near duplicate
+    now at       lake/academic-rules-handbook/2026-06/academic-rules-handbook-jun-2026.pdf
+
+prospectus-2026-academic-rules-and-regulations.pdf  [sources]  ->  ACTIVE
+    quality      PASS  32,971 characters, 0.00% unreadable
+    completeness PASS  title, version 2026, 5 page(s); not truncated
+    recency      PASS  no other version of prospectus-academic-rules
+    uniqueness   PASS  no exact or near duplicate; nearest other document academic-rules-handbook@2025-06 at cosine 0.874
+    now at       lake/prospectus-academic-rules/2026/prospectus-2026-academic-rules-and-regulations.pdf
+
+student-handbook-jun-2026.pdf  [sources]  ->  ACTIVE
+    quality      PASS  141,308 characters, 0.00% unreadable
+    completeness PASS  title, version 2026-06, 62 page(s); not truncated
+    recency      PASS  no other version of student-handbook
+    uniqueness   PASS  no exact or near duplicate; nearest other document academic-rules-handbook@2026-06 at cosine 0.899
+    now at       lake/student-handbook/2026-06/student-handbook-jun-2026.pdf
+
+annual-report-2019-20.pdf  [sources]  ->  ACTIVE
+    quality      PASS  51,825 characters, 0.00% unreadable
+    completeness PASS  title, version 2019-20, 32 page(s); not truncated
+    recency      PASS  no other version of annual-report-2019-20
+    uniqueness   PASS  no exact or near duplicate; nearest other document student-handbook@2026-06 at cosine 0.920
+    now at       lake/annual-report-2019-20/2019-20/annual-report-2019-20.pdf
+
+annual-report-2023-24.pdf  [sources]  ->  ACTIVE
+    quality      PASS  212,136 characters, 0.09% unreadable
+    completeness PASS  title, version 2023-24, 84 page(s); not truncated
+    recency      PASS  no other version of annual-report-2023-24
+    uniqueness   PASS  no exact or near duplicate; nearest other document annual-report-2019-20@2019-20 at cosine 0.917
+    now at       lake/annual-report-2023-24/2023-24/annual-report-2023-24.pdf
+
+fee-structure-page.html  [sources]  ->  ACTIVE
+    quality      PASS  3,775 characters, 0.03% unreadable
+    completeness PASS  title, version 2026-27, 1 page(s); not truncated
+    recency      PASS  no other version of fee-structure
+    uniqueness   PASS  no exact or near duplicate; nearest other document prospectus-academic-rules@2026 at cosine 0.777
+    now at       lake/fee-structure/2026-27/fee-structure-page.html
+
+admissions-faq-page.html  [sources]  ->  ACTIVE
+    quality      PASS  9,702 characters, 0.47% unreadable
+    completeness PASS  title, version 2026-06, 1 page(s); not truncated
+    recency      PASS  no other version of admissions-faq
+    uniqueness   PASS  no exact or near duplicate; nearest other document academic-rules-handbook@2026-06 at cosine 0.836
+    now at       lake/admissions-faq/2026-06/admissions-faq-page.html
+
+faculty-entrepreneurship-and-technical-start-ups-policy.pdf  [sources]  ->  ACTIVE
+    quality      PASS  11,774 characters, 0.00% unreadable
+    completeness PASS  title, version 2022-05, 8 page(s); not truncated
+    recency      PASS  no other version of oric-startups-policy
+    uniqueness   PASS  no exact or near duplicate; nearest other document academic-rules-handbook@2025-06 at cosine 0.829
+    now at       lake/oric-startups-policy/2022-05/faculty-entrepreneurship-and-technical-start-ups-policy.pdf
+
+9 documents: 8 active, 1 archived, 0 quarantined
+failures by check: quality 0, completeness 0, recency 1, uniqueness 0

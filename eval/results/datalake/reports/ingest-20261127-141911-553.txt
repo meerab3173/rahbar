@@ -1,0 +1,28 @@
+INGESTION REPORT  run 20261127-141911-553
+collection rahbar-nomic-embed-text-c200o30  generation 20261127-141911-553  (pointer flipped)
+model nomic-embed-text  chunks 200/30
+
+per document:
+  academic-rules-handbook@2025-06                            added (0 deleted, 174 embedded)
+  academic-rules-handbook@2026-06                            added (0 deleted, 151 embedded)
+  admissions-faq@2026-06                                     added (0 deleted, 34 embedded)
+  annual-report-2019-20@2019-20                              added (0 deleted, 94 embedded)
+  annual-report-2023-24@2023-24                              added (0 deleted, 322 embedded)
+  fee-structure@2026-27                                      added (0 deleted, 10 embedded)
+  oric-startups-policy@2022-05                               added (0 deleted, 26 embedded)
+  prospectus-academic-rules@2026                             added (0 deleted, 46 embedded)
+  student-handbook@2026-06                                   added (0 deleted, 181 embedded)
+
+chunks by doc_id (after this run):
+  academic-rules-handbook                                      325
+  admissions-faq                                                34
+  annual-report-2019-20                                         94
+  annual-report-2023-24                                        322
+  fee-structure                                                 10
+  oric-startups-policy                                          26
+  prospectus-academic-rules                                     46
+  student-handbook                                             181
+
+CHUNKS EMBEDDED: 1038   deleted: 0   kept: 0   relabelled: 0   total in collection: 1038
+orphan chunks (doc_keys not in the catalog): 0
+seconds: 425.7

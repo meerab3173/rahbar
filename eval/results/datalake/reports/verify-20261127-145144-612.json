@@ -1,0 +1,498 @@
+{
+  "run_id": "20261127-145144-612",
+  "documents": [
+    {
+      "doc_key": "academic-rules-handbook@2025-06",
+      "file": "academic-rules-handbook-jun-2025.pdf",
+      "origin": "sources",
+      "sha256": "d62f36e8c071661fd5855c89a2b5f7ac369c53c80a75363438ab293d5a22c75e",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "126,492 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2025-06, 54 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate"
+        },
+        "recency": {
+          "result": "fail",
+          "reason": "newer version academic-rules-handbook@2026-06 exists"
+        }
+      },
+      "decision": "archived",
+      "stats": {
+        "chars": 126492,
+        "garbled_ratio": 0.0,
+        "pages": 54,
+        "empty_pages": 0,
+        "nearest": "",
+        "nearest_similarity": 0.0
+      },
+      "now_at": "archive/academic-rules-handbook/2025-06/academic-rules-handbook-jun-2025.pdf"
+    },
+    {
+      "doc_key": "academic-rules-handbook@2026-06",
+      "file": "academic-rules-handbook-jun-2026.pdf",
+      "origin": "sources",
+      "sha256": "4cfee3e191b84aeb9168f17656c7642212ff52b90f2780d028b33c154aa74b62",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "96,614 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026-06, 57 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "latest of 2 versions of academic-rules-handbook"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 96614,
+        "garbled_ratio": 0.0,
+        "pages": 57,
+        "empty_pages": 3,
+        "nearest": "",
+        "nearest_similarity": 0.0
+      },
+      "now_at": "lake/academic-rules-handbook/2026-06/academic-rules-handbook-jun-2026.pdf"
+    },
+    {
+      "doc_key": "prospectus-academic-rules@2026",
+      "file": "prospectus-2026-academic-rules-and-regulations.pdf",
+      "origin": "sources",
+      "sha256": "a7e7f6896a59eb9413c9e8826e6c4c018ebe52045d10cebfcba92ded10a3174a",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "32,971 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026, 5 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document academic-rules-handbook@2025-06 at cosine 0.874"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of prospectus-academic-rules"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 32971,
+        "garbled_ratio": 0.0,
+        "pages": 5,
+        "empty_pages": 0,
+        "nearest": "academic-rules-handbook@2025-06",
+        "nearest_similarity": 0.8735
+      },
+      "now_at": "lake/prospectus-academic-rules/2026/prospectus-2026-academic-rules-and-regulations.pdf"
+    },
+    {
+      "doc_key": "student-handbook@2026-06",
+      "file": "student-handbook-jun-2026.pdf",
+      "origin": "sources",
+      "sha256": "717eb4b8d37e50185ffe952735c08ef19edd16074d547f10ebd22cf23da67c4d",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "141,308 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026-06, 62 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document academic-rules-handbook@2026-06 at cosine 0.899"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of student-handbook"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 141308,
+        "garbled_ratio": 0.0,
+        "pages": 62,
+        "empty_pages": 2,
+        "nearest": "academic-rules-handbook@2026-06",
+        "nearest_similarity": 0.8988
+      },
+      "now_at": "lake/student-handbook/2026-06/student-handbook-jun-2026.pdf"
+    },
+    {
+      "doc_key": "annual-report-2019-20@2019-20",
+      "file": "annual-report-2019-20.pdf",
+      "origin": "sources",
+      "sha256": "4d1961e340b13273bb039805ab5fd5e2c7bd0144a5bd5870f2ce4da13becd650",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "51,825 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2019-20, 32 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document student-handbook@2026-06 at cosine 0.920"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of annual-report-2019-20"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 51825,
+        "garbled_ratio": 0.0,
+        "pages": 32,
+        "empty_pages": 0,
+        "nearest": "student-handbook@2026-06",
+        "nearest_similarity": 0.9199
+      },
+      "now_at": "lake/annual-report-2019-20/2019-20/annual-report-2019-20.pdf"
+    },
+    {
+      "doc_key": "annual-report-2023-24@2023-24",
+      "file": "annual-report-2023-24.pdf",
+      "origin": "sources",
+      "sha256": "3c9d89e84af24df4b939f10e32c620a3877b276acea1db52f1aae4098e5c057a",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "212,136 characters, 0.09% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2023-24, 84 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document annual-report-2019-20@2019-20 at cosine 0.917"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of annual-report-2023-24"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 212136,
+        "garbled_ratio": 0.0009,
+        "pages": 84,
+        "empty_pages": 0,
+        "nearest": "annual-report-2019-20@2019-20",
+        "nearest_similarity": 0.9171
+      },
+      "now_at": "lake/annual-report-2023-24/2023-24/annual-report-2023-24.pdf"
+    },
+    {
+      "doc_key": "fee-structure@2026-27",
+      "file": "fee-structure-page.html",
+      "origin": "sources",
+      "sha256": "ec8872ae77cac7e96e20e6979933f36b00aaeb0ab3f668a2116e521c655e7b90",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "3,775 characters, 0.03% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026-27, 1 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document prospectus-academic-rules@2026 at cosine 0.777"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of fee-structure"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 3775,
+        "garbled_ratio": 0.0003,
+        "pages": 1,
+        "empty_pages": 0,
+        "nearest": "prospectus-academic-rules@2026",
+        "nearest_similarity": 0.7775
+      },
+      "now_at": "lake/fee-structure/2026-27/fee-structure-page.html"
+    },
+    {
+      "doc_key": "admissions-faq@2026-06",
+      "file": "admissions-faq-page.html",
+      "origin": "sources",
+      "sha256": "d614b3e3c1e539ae4e4d8e4dab0bc1d03c92f6ea08af2baea33040496970500e",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "9,702 characters, 0.47% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026-06, 1 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document academic-rules-handbook@2026-06 at cosine 0.836"
+        },
+        "recency": {
+          "result": "fail",
+          "reason": "newer version admissions-faq@2027-06 exists"
+        }
+      },
+      "decision": "archived",
+      "stats": {
+        "chars": 9702,
+        "garbled_ratio": 0.0047,
+        "pages": 1,
+        "empty_pages": 0,
+        "nearest": "academic-rules-handbook@2026-06",
+        "nearest_similarity": 0.8362
+      },
+      "now_at": "archive/admissions-faq/2026-06/admissions-faq-page.html"
+    },
+    {
+      "doc_key": "oric-startups-policy@2022-05",
+      "file": "faculty-entrepreneurship-and-technical-start-ups-policy.pdf",
+      "origin": "sources",
+      "sha256": "c2d5c7648d1593daf34d5c0596ede476e8984b0551830cc1690017e6e22f1359",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "11,774 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2022-05, 8 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document academic-rules-handbook@2025-06 at cosine 0.829"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of oric-startups-policy"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 11774,
+        "garbled_ratio": 0.0,
+        "pages": 8,
+        "empty_pages": 0,
+        "nearest": "academic-rules-handbook@2025-06",
+        "nearest_similarity": 0.8286
+      },
+      "now_at": "lake/oric-startups-policy/2022-05/faculty-entrepreneurship-and-technical-start-ups-policy.pdf"
+    },
+    {
+      "doc_key": "admissions-faq@2027-06",
+      "file": "b09-admissions-faq-2027.md",
+      "origin": "batch:batch-b",
+      "sha256": "ed1f5e585ff8db4b5f11f8b28661291f1f9bc4ee4886659fbbb34644c86563cf",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "932 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2027-06, 1 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document prospectus-academic-rules@2026 at cosine 0.784"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "latest of 2 versions of admissions-faq"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 932,
+        "garbled_ratio": 0.0,
+        "pages": 1,
+        "empty_pages": 0,
+        "nearest": "prospectus-academic-rules@2026",
+        "nearest_similarity": 0.7838
+      },
+      "now_at": "lake/admissions-faq/2027-06/b09-admissions-faq-2027.md"
+    },
+    {
+      "doc_key": "counselling-services@2026-09",
+      "file": "b10-counselling-services.md",
+      "origin": "batch:batch-b",
+      "sha256": "ec004b33706e4edf96875a4425370c1db1844fe515baf437c08bce6107e490d5",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "917 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026-09, 1 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document admissions-faq@2027-06 at cosine 0.785"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of counselling-services"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 917,
+        "garbled_ratio": 0.0,
+        "pages": 1,
+        "empty_pages": 0,
+        "nearest": "admissions-faq@2027-06",
+        "nearest_similarity": 0.785
+      },
+      "now_at": "lake/counselling-services/2026-09/b10-counselling-services.md"
+    },
+    {
+      "doc_key": "exam-hall-conduct@2026-09",
+      "file": "b01-exam-hall-conduct.md",
+      "origin": "batch:batch-b",
+      "sha256": "60a2c49f606a3bcbadb0328aac85e90861c5d5ad28bead59196a089d0d02db85",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "1,406 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026-09, 1 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document admissions-faq@2027-06 at cosine 0.818"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of exam-hall-conduct"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 1406,
+        "garbled_ratio": 0.0,
+        "pages": 1,
+        "empty_pages": 0,
+        "nearest": "admissions-faq@2027-06",
+        "nearest_similarity": 0.8177
+      },
+      "now_at": "lake/exam-hall-conduct/2026-09/b01-exam-hall-conduct.md"
+    },
+    {
+      "doc_key": "scholarship-policy@2026-09",
+      "file": "b05-scholarship-policy.md",
+      "origin": "batch:batch-b",
+      "sha256": "b3e1182a08282e2fd0068bfdea6c9703ce3ac187495583b33757f59c527b1c92",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "1,197 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026-09, 1 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document admissions-faq@2027-06 at cosine 0.805"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of scholarship-policy"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 1197,
+        "garbled_ratio": 0.0,
+        "pages": 1,
+        "empty_pages": 0,
+        "nearest": "admissions-faq@2027-06",
+        "nearest_similarity": 0.8054
+      },
+      "now_at": "lake/scholarship-policy/2026-09/b05-scholarship-policy.md"
+    },
+    {
+      "doc_key": "library-borrowing-rules@2026-09",
+      "file": "b03-library-borrowing-rules.md",
+      "origin": "batch:batch-b-update",
+      "sha256": "89b2ab0db341275ba0e62eea0ae8e5895bfadc3b5b01db0ddca15b1d045f8bae",
+      "checks": {
+        "quality": {
+          "result": "pass",
+          "reason": "1,333 characters, 0.00% unreadable"
+        },
+        "completeness": {
+          "result": "pass",
+          "reason": "title, version 2026-09, 1 page(s); not truncated"
+        },
+        "uniqueness": {
+          "result": "pass",
+          "reason": "no exact or near duplicate; nearest other document exam-hall-conduct@2026-09 at cosine 0.813"
+        },
+        "recency": {
+          "result": "pass",
+          "reason": "no other version of library-borrowing-rules"
+        }
+      },
+      "decision": "active",
+      "stats": {
+        "chars": 1333,
+        "garbled_ratio": 0.0,
+        "pages": 1,
+        "empty_pages": 0,
+        "nearest": "exam-hall-conduct@2026-09",
+        "nearest_similarity": 0.8128
+      },
+      "now_at": "lake/library-borrowing-rules/2026-09/b03-library-borrowing-rules.md"
+    }
+  ],
+  "counts": {
+    "active": 12,
+    "archived": 2,
+    "quarantine": 0
+  },
+  "thresholds": {
+    "min_text_chars": 200,
+    "max_garbled_ratio": 0.1,
+    "near_dup_threshold": 0.95,
+    "fingerprint_model": "nomic-embed-text"
+  },
+  "failures_by_check": {
+    "quality": 0,
+    "completeness": 0,
+    "recency": 2,
+    "uniqueness": 0
+  }
+}
