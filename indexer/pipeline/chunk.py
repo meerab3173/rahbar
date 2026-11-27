@@ -205,7 +205,7 @@ def chunk(doc: Document, size: int, overlap: int, strategy: str = "structure") -
         chunks.append(Chunk(
             id=f"{_slug(doc.source)}-{len(chunks):04d}", text=text, source=doc.source,
             section=label, page=page, doc_version=doc.doc_version,
-            superseded=doc.superseded))
+            superseded=doc.superseded, doc_id=doc.doc_id, doc_sha256=doc.sha256))
 
     for sec in sections(doc):
         units: list[Para] = []
@@ -249,7 +249,8 @@ def chunk_fixed(doc: Document, size: int, overlap: int) -> list[Chunk]:
         out.append(Chunk(id=f"{_slug(doc.source)}-f{len(out):04d}",
                          text=" ".join(w for w, _ in window), source=doc.source,
                          section="(fixed window)", page=window[0][1],
-                         doc_version=doc.doc_version, superseded=doc.superseded))
+                         doc_version=doc.doc_version, superseded=doc.superseded,
+                         doc_id=doc.doc_id, doc_sha256=doc.sha256))
     return out
 
 

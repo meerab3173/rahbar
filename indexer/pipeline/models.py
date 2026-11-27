@@ -21,6 +21,16 @@ class Document:
     doc_version: str         # e.g. "2026-06"; from corpus/sources.yaml
     superseded: bool         # True for an older version of a policy
     pages: list[Page] = field(default_factory=list)
+    # Data-lake identity (Assignment 03, Part A). doc_id names the document across its
+    # versions ("academic-rules-handbook"); doc_key is one version of it
+    # ("academic-rules-handbook@2026-06"); sha256 is of the original file's bytes.
+    doc_id: str = ""
+    title: str = ""
+    sha256: str = ""
+
+    @property
+    def doc_key(self) -> str:
+        return f"{self.doc_id or self.source}@{self.doc_version}"
 
 
 @dataclass
@@ -32,6 +42,12 @@ class Chunk:
     page: int
     doc_version: str
     superseded: bool
+    doc_id: str = ""         # the document across versions (Part A): counted per doc_id
+    doc_sha256: str = ""     # the file this chunk came from: unchanged hash = no re-embed
+
+    @property
+    def doc_key(self) -> str:
+        return f"{self.doc_id or self.source}@{self.doc_version}"
 
     def metadata(self) -> dict[str, str | int | bool]:
         """Chroma metadata values must be str, int, float or bool."""
@@ -41,4 +57,7 @@ class Chunk:
             "page": self.page,
             "doc_version": self.doc_version,
             "superseded": self.superseded,
+            "doc_id": self.doc_id or self.source,
+            "doc_key": self.doc_key,
+            "doc_sha256": self.doc_sha256,
         }
