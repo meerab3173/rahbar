@@ -4,6 +4,9 @@
 #
 # doc_version and superseded become chunk metadata (section 3.1): they are how the
 # retriever tells the current rule from the repealed one.
+# doc_id (Assignment 03, Part A) names a document across its versions: the two Academic
+# Rules Handbooks share one, so the verification stage's recency check archives 2025.
+# The two annual reports are different documents (different years' facts), not versions.
 # Checked against the live site on 8 November 2026.
 
 documents:
@@ -14,11 +17,13 @@ documents:
   # exceptions, no summer attendance rule; 2026 6.1-6.3: repeat courses only, four
   # eligible categories, and 6.7: the 80% attendance rule applies in summer).
   - name: Academic Rules Handbook (Jun 2025)
+    doc_id: academic-rules-handbook
     url: https://web.archive.org/web/2025id_/https://nu.edu.pk/public/downloads/Academic_Rules_Handbook_2025.pdf
     doc_version: "2025-06"
     superseded: true
 
   - name: Academic Rules Handbook (Jun 2026)
+    doc_id: academic-rules-handbook
     url: https://nu.edu.pk/public/downloads/Academic_Rules_Handbook_2026.pdf
     doc_version: "2026-06"
     superseded: false
@@ -26,34 +31,40 @@ documents:
   # The same rules in 5 pages with different clause numbers (attendance is clause 1
   # here, 1.21 in the handbook): the exact-term trap.
   - name: Prospectus 2026 - Academic Rules and Regulations
+    doc_id: prospectus-academic-rules
     url: https://nu.edu.pk/Admissions/ProspectusUpload/Academic Rules and Regulations.pdf
     doc_version: "2026"
     superseded: false
 
   # Property 5: long definitions (the Generative AI policy, with numbered sub-sections).
   - name: Student Handbook (Jun 2026)
+    doc_id: student-handbook
     url: https://nu.edu.pk/public/downloads/Student_Handbook_2026.pdf
     doc_version: "2026-06"
     superseded: false
 
   # Property 4: tables (faculty by campus, graduates, publications), and versions over time.
   - name: Annual Report 2019-20
+    doc_id: annual-report-2019-20
     url: https://nu.edu.pk/public/downloads/AnnualReportForm/Annual Report 2019-20.pdf
     doc_version: "2019-20"
     superseded: false
 
   - name: Annual Report 2023-24
+    doc_id: annual-report-2023-24
     url: https://nu.edu.pk/public/downloads/AnnualReportForm/Annual Report 2023-24.pdf
     doc_version: "2023-24"
     superseded: false
 
   # Property 4 and 7: HTML tables and exact fees.
   - name: Fee Structure page
+    doc_id: fee-structure
     url: https://www.nu.edu.pk/Admissions/FeeStructure
     doc_version: "2026-27"
     superseded: false
 
   - name: Admissions FAQ page
+    doc_id: admissions-faq
     url: https://www.nu.edu.pk/Admissions/FAQ
     doc_version: "2026-06"
     superseded: false
@@ -61,6 +72,7 @@ documents:
   # Property 3: scanned, image-only PDF. Confirm with: pdffonts corpus/raw/<file>.pdf
   # (an empty font list means there is no text layer). The indexer OCRs it.
   - name: Faculty Entrepreneurship and Technical Start-ups Policy
+    doc_id: oric-startups-policy
     url: https://nu.edu.pk/OricResources/ResearchPolicies/27.pdf?20220530
     doc_version: "2022-05"
     superseded: false
