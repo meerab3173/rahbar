@@ -48,3 +48,14 @@ def record_cache(hit: bool) -> None:
     _lookups["total"] += 1
     _lookups["hits"] += int(hit)
     CACHE_HIT_RATIO.set(_lookups["hits"] / _lookups["total"])
+
+# --- Assignment 03, Part D3 ------------------------------------------------------------------
+STAGE_SECONDS = Histogram(
+    "rahbar_stage_seconds", "Latency per pipeline stage (embed, cache_lookup, retrieve, "
+    "generate, guards, total); p95 per stage with histogram_quantile",
+    ["stage"], buckets=(0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2, 5, 10, 30, 60,
+                        120, 300, 600))
+INJECTIONS_FLAGGED = Counter("rahbar_injection_flagged_total",
+                             "Retrieved chunks that carried an instruction-like line")
+ANSWERS = Counter("rahbar_answers_total", "Answers, by whether the system abstained "
+                  "(abstention rate = abstained=true / all)", ["abstained"])
