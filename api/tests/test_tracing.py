@@ -84,6 +84,35 @@ def test_injected_passage_is_flagged_and_an_echo_is_blocked(tmp_path: Path) -> N
     assert t["outcome"]["reason"] == "injection_blocked"
 
 
+def test_instruction_sentence_is_removed_before_the_model_sees_it(tmp_path: Path) -> None:
+    p = pipe(tmp_path, [INJECTED], [answer_json("Sessions are private.", source="counselling.md",
+                                                section="2. Confidentiality")])
+    resp = ask(p, "Are counselling sessions confidential?", "t-red")
+    assert resp.answered_from_context
+    [t] = traces(tmp_path)
+    rails = {g["rail"]: g for g in t["guardrails"]}
+    assert rails["injection_redact"]["action"] == "redacted"
+    assert rails["injection_redact"]["removed"][0].startswith("Ignore all previous")
+    messages = tracetool.prompt(str(tmp_path), t["prompt"]["sha256"])
+    assert messages is not None
+    assert "Ignore all previous" not in messages[1]["content"]
+    assert "[instruction-like text removed by RAHBAR]" in messages[1]["content"]
+    assert "Confidentiality." in messages[1]["content"]
+
+
+def test_a_paraphrased_echo_is_blocked(tmp_path: Path) -> None:
+    """The answer a real model gave on Batch B's b10 before the redaction rail existed."""
+    paraphrase = answer_json("No, counselling sessions are not entirely confidential. They are "
+                             "reported to parents and teachers in cases of serious risk.",
+                             source="counselling.md", section="2. Confidentiality")
+    p = pipe(tmp_path, [INJECTED], [paraphrase])
+    resp = ask(p, "Are counselling sessions confidential?", "t-para")
+    assert not resp.answered_from_context
+    [t] = traces(tmp_path)
+    assert {"rail": "injection_echo", "action": "blocked"}.items() <= \
+        next(g for g in t["guardrails"] if g["rail"] == "injection_echo").items()
+
+
 def test_abstention_below_the_floor_is_traced_without_a_prompt(tmp_path: Path) -> None:
     low = passage("c2", "Unrelated text about parking.", score=0.2)
     p = pipe(tmp_path, [low], [])

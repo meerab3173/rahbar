@@ -52,6 +52,7 @@ from .guards import (
     ground_citations,
     is_followup,
     looks_injected,
+    redact_injections,
     wants_old_version,
 )
 
@@ -201,14 +202,20 @@ def _answer(request: AskRequest, pipe: Pipeline, trace: dict[str, Any]) -> AskRe
         return _respond(_abstain(NOT_COVERED), passages, pipe, outcome)
     tracing.rail("relevance_floor", "pass", top1=round(top, 4), floor=settings.relevance_floor)
 
-    # Retrieval rail (D4): retrieved text that tries to give the model instructions is
-    # flagged. It stays in the evidence as data (the prompt says so); the echo check
-    # below blocks any answer that repeats it.
+    # Retrieval rail (D4): a retrieved chunk that tries to instruct the model is flagged,
+    # and its instruction sentences are removed before the model sees them. The rest of
+    # the chunk stays as evidence. The echo check below is the second wall.
     injected = [p.chunk_id for p in passages if looks_injected(p.text)]
+    evidence = passages
     if injected:
         INJECTIONS_FLAGGED.inc(len(injected))
-        tracing.rail("injection_scan", "flagged", chunk_ids=injected,
-                     note="kept as data inside <evidence>; the answer is checked for echoes")
+        evidence, removed = [], []
+        for p in passages:
+            clean, cut = redact_injections(p.text) if p.chunk_id in injected else (p.text, [])
+            removed.extend(cut)
+            evidence.append(p.model_copy(update={"text": clean}) if cut else p)
+        tracing.rail("injection_scan", "flagged", chunk_ids=injected)
+        tracing.rail("injection_redact", "redacted", chunk_ids=injected, removed=removed)
     else:
         tracing.rail("injection_scan", "pass")
 
@@ -216,7 +223,7 @@ def _answer(request: AskRequest, pipe: Pipeline, trace: dict[str, Any]) -> AskRe
     started = time.perf_counter()
     try:
         with tracing.stage("generate"):
-            answer = pipe.provider.generate(question, passages)
+            answer = pipe.provider.generate(question, evidence)
     except GenerationError as exc:
         outcome["fallback"] = exc.reason
         answer = _abstain(FALLBACK)
