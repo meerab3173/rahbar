@@ -1,0 +1,28 @@
+# Four extra synthetic questions for Part B (two more abstentions, two hard paraphrases).
+# Same format as eval/golden.yaml. Checked by hand by Meerab before use.
+questions:
+  - id: s01
+    type: abstain
+    question: What are the opening hours of the campus pharmacy?
+    must_abstain: true
+
+  - id: s02
+    type: abstain
+    question: Which bus routes does the university shuttle cover in Rawalpindi?
+    must_abstain: true
+
+  - id: s03
+    type: paraphrase
+    hard: true
+    question: If my GPA keeps staying under 2 for three terms in a row, will I be kicked out?
+    relevant:
+      - {source: academic-rules-handbook-jun-2026.pdf, section: "Academic Warning/Probation"}
+    expect: "closed"
+
+  - id: s04
+    type: paraphrase
+    hard: true
+    question: Is there a cutoff after which I can no longer drop a subject I enrolled in?
+    relevant:
+      - {source: academic-rules-handbook-jun-2026.pdf, section: ""}
+    expect: "makeup week"

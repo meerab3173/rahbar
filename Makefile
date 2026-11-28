@@ -175,3 +175,16 @@ traces-pull: ## copy the trace volume into traces/ (commit samples for the repor
 metrics: ## F4: the metrics endpoint through kubectl port-forward (Ctrl+C to stop)
 	@echo "port-forwarding svc/api to localhost:9000; in another window: curl -s localhost:9000/metrics | grep rahbar_"
 	kubectl -n $(NS) port-forward svc/api 9000:8000
+
+# ---- Part B: golden set and the three-level suite ------------------------------------
+golden: ## B1: build eval/golden.jsonl from golden.yaml, the extra questions and the hand-written files
+	$(BIN)/python scripts/build_golden.py
+
+golden-check: ## B1: counts of the golden set against Part B
+	$(BIN)/python scripts/build_golden.py --check
+
+suite: ## B: module, component and end-to-end tests, run twice: make suite (RUNS=1 to try, LABEL=baseline)
+	$(BIN)/python scripts/eval_suite.py --runs $(or $(RUNS),2) --label "$(LABEL)"
+
+judge-agreement: ## B: judge vs hand labels: make judge-agreement FILE=eval/results/suite-...-judge.csv
+	$(BIN)/python scripts/eval_suite.py --agreement $(FILE)
