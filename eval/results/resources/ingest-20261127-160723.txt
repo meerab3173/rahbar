@@ -1,0 +1,8 @@
+RESOURCES  ingest  (209 samples, every 5 s)
+container      cpu median  cpu peak  mem median  mem peak
+api                    7m       54m       95Mi     106Mi
+chroma                 2m        8m      113Mi     119Mi
+indexer             1133m     1300m      392Mi     703Mi
+redis                 17m       18m       15Mi      16Mi
+shell                  0m        0m        0Mi       0Mi
+ui                     1m        1m        2Mi       2Mi
