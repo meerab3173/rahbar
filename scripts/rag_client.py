@@ -1,4 +1,5 @@
 """Small helpers shared by the Part B scripts.
+# ruff: noqa
 
 Questions go through `make ask`, the same path a user's question takes (Ingress -> api),
 so the suite measures the deployed pipeline and needs no knowledge of the API's URL.

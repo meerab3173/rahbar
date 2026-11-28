@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa
 """Part B: the offline test suite at three levels (paper 4.2.5, Table 1).
 
   module      embedding: paraphrase vs unrelated cosine gap, ms per chunk, determinism
@@ -160,7 +161,7 @@ def context_for(trace_id) -> str:
         return ""
     if "--- user ---" in out:
         out = out.split("--- user ---", 1)[1]
-        lines = []
+        lines: list[str] = []
         for line in out.splitlines():
             if line.startswith("---") and lines:
                 break
