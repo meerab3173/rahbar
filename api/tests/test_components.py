@@ -58,6 +58,17 @@ def test_follows_the_pointer_and_filters_superseded() -> None:
     assert r.generation() == "rahbar-v2"
 
 
+def test_generation_changes_with_the_pointer_generation() -> None:
+    """Assignment 03, A2: an incremental re-index keeps the collection name but changes
+    the pointer's generation, and the semantic cache keys on the generation."""
+    col = FakeCollection("rahbar-v2", META, list(ROWS))
+    pointer = PointerCollection("rahbar-v2", generation="20261127-101500-000")
+    s = Settings(retriever="chroma", embed_model=HASH_MODEL)
+    r = ChromaRetriever(s, client=FakeChroma({"rahbar-v2": col, "rahbar-active": pointer}),
+                        embedder=FakeEmbedder())
+    assert r.generation() == "rahbar-v2@20261127-101500-000"
+
+
 def test_similarity_is_one_minus_distance() -> None:
     r, _ = retriever()
     hit = r.retrieve("attendance", k=1, include_superseded=True)[0]

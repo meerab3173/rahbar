@@ -13,7 +13,7 @@ HOST ?= rahbar.local
 
 .DEFAULT_GOAL := help
 
-.PHONY: rollout-demo
+.PHONY: rollout-demo ingest batch lake-status lake-report restore release delete-doc lake-pull
 .PHONY: help install test lint dev cluster images apply secret index ask fetch eval eval-fixtures check tune cache-threshold sections evidence demo-pin
 
 help: ## list the targets
@@ -57,7 +57,7 @@ secret: ## create the LLM key Secret from the LLM_API_KEY variable; never from a
 	kubectl create secret generic rahbar-secret -n $(NS) \
 	  --from-literal=LLM_API_KEY="$$LLM_API_KEY" --dry-run=client -o yaml | kubectl apply -f -
 
-index: ## run the indexer once, from the CronJob's template 
+index: ## run the indexer once, from the CronJob's template (make ingest also waits and prints)
 	kubectl create job --from=cronjob/reindex reindex-$$(date +%s) -n $(NS)
 	@echo "watch it with: kubectl get jobs -n $(NS) -w"
 
@@ -112,3 +112,40 @@ rollout-demo: ## section 4.6: ship v2 with kubectl set image, watch it, then rol
 	kubectl -n $(NS) rollout status deployment/api
 	curl -s -o /dev/null -D - -H "Host: $(HOST)" http://$(INGRESS_IP)/api/ask -X POST -H 'Content-Type: application/json' -d '{"question":"version check please"}' | grep -i x-app-version
 	kubectl -n $(NS) rollout history deployment/api
+
+# --- Assignment 03, Part A: the data lake (docs/DATA-LAKE.md) -----------------------------------
+SHELL_POD = $$(kubectl -n $(NS) get pod -l app.kubernetes.io/name=datalake-shell -o jsonpath='{.items[0].metadata.name}')
+LAKE = kubectl -n $(NS) exec deploy/datalake-shell -- python -m pipeline.lake
+
+ingest: ## run the ingestion Job once (verify + incremental update), wait, print its reports
+	@name=ingest-$$(date +%s); \
+	kubectl create job --from=cronjob/reindex $$name -n $(NS) && \
+	kubectl -n $(NS) wait --for=condition=complete job/$$name --timeout=60m && \
+	kubectl -n $(NS) logs job/$$name -c indexer | grep -v '^{'
+
+batch: ## copy a folder of new documents into the lake's inbox: make batch DIR=corpus/batch-b
+	@test -n "$(DIR)" || { echo "usage: make batch DIR=<folder> [NAME=<batch name>]"; exit 1; }
+	kubectl -n $(NS) cp "$(DIR)" "$(SHELL_POD):/datalake/inbox/$${NAME:-$$(basename $(DIR))}"
+	$(LAKE) status | tail -3
+	@echo "now run: make ingest"
+
+lake-status: ## every document version in the data lake, and where it is
+	$(LAKE) status
+
+lake-report: ## print the latest report: make lake-report KIND=verify (or KIND=ingest)
+	$(LAKE) report $${KIND:-verify} $(RUN)
+
+restore: ## roll back to an archived version on the next run: make restore DOC=<doc_id>@<version>
+	$(LAKE) request restore "$(DOC)"
+
+release: ## undo a restore, so recency decides again: make release DOC_ID=<doc_id>
+	$(LAKE) request release "$(DOC_ID)"
+
+delete-doc: ## delete a document version and all its chunks on the next run: make delete-doc DOC=...
+	$(LAKE) request delete "$(DOC)"
+
+lake-pull: ## copy the data lake's reports and catalog into eval/results/datalake/ (commit them)
+	mkdir -p eval/results/datalake
+	kubectl -n $(NS) cp "$(SHELL_POD):/datalake/reports" eval/results/datalake/reports
+	kubectl -n $(NS) cp "$(SHELL_POD):/datalake/state/catalog.json" eval/results/datalake/catalog.json
+	ls eval/results/datalake/reports | tail -6

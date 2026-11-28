@@ -1,0 +1,57 @@
+{
+  "run_id": "20261127-141911-553",
+  "collection": "rahbar-nomic-embed-text-c200o30",
+  "generation": "20261127-141911-553",
+  "pointer_flipped": true,
+  "requests": [],
+  "skipped_deleted": [],
+  "documents": {
+    "active": 8,
+    "archived": 1,
+    "quarantine": 0
+  },
+  "chunks": {
+    "embedded": 1038,
+    "deleted": 0,
+    "kept": 0,
+    "relabelled": 0,
+    "total": 1038
+  },
+  "per_document": {
+    "academic-rules-handbook@2025-06": "added (0 deleted, 174 embedded)",
+    "academic-rules-handbook@2026-06": "added (0 deleted, 151 embedded)",
+    "admissions-faq@2026-06": "added (0 deleted, 34 embedded)",
+    "annual-report-2019-20@2019-20": "added (0 deleted, 94 embedded)",
+    "annual-report-2023-24@2023-24": "added (0 deleted, 322 embedded)",
+    "fee-structure@2026-27": "added (0 deleted, 10 embedded)",
+    "oric-startups-policy@2022-05": "added (0 deleted, 26 embedded)",
+    "prospectus-academic-rules@2026": "added (0 deleted, 46 embedded)",
+    "student-handbook@2026-06": "added (0 deleted, 181 embedded)"
+  },
+  "counts_by_doc_id": {
+    "academic-rules-handbook": 325,
+    "admissions-faq": 34,
+    "annual-report-2019-20": 94,
+    "annual-report-2023-24": 322,
+    "fee-structure": 10,
+    "oric-startups-policy": 26,
+    "prospectus-academic-rules": 46,
+    "student-handbook": 181
+  },
+  "counts_by_doc_key": {
+    "academic-rules-handbook@2025-06": 174,
+    "academic-rules-handbook@2026-06": 151,
+    "admissions-faq@2026-06": 34,
+    "annual-report-2019-20@2019-20": 94,
+    "annual-report-2023-24@2023-24": 322,
+    "fee-structure@2026-27": 10,
+    "oric-startups-policy@2022-05": 26,
+    "prospectus-academic-rules@2026": 46,
+    "student-handbook@2026-06": 181
+  },
+  "orphans": [],
+  "seconds": 425.7,
+  "embed_model": "nomic-embed-text",
+  "chunk_size": 200,
+  "chunk_overlap": 30
+}

@@ -1,0 +1,54 @@
+# A small pod with the data lake mounted, for people, not for indexing:
+#   kubectl cp corpus/batch-b rahbar/<pod>:/datalake/inbox/batch-b   (a new batch)
+#   kubectl exec deploy/datalake-shell -- python -m pipeline.lake status
+#   kubectl exec deploy/datalake-shell -- python -m pipeline.lake request restore <doc_key>
+#   kubectl exec deploy/datalake-shell -- python -m pipeline.lake report verify
+# It cannot write to the vector store: the default-deny NetworkPolicy gives it no egress,
+# and chroma-ingress admits only the api and the indexer. The ingestion Job stays the
+# only writer (F2); this pod only queues requests that the next Job run applies.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datalake-shell
+  namespace: rahbar
+  labels: {app.kubernetes.io/name: datalake-shell, app.kubernetes.io/part-of: rahbar}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}     # one pod at a time on the ReadWriteOnce volume
+  selector:
+    matchLabels: {app.kubernetes.io/name: datalake-shell}
+  template:
+    metadata:
+      labels: {app.kubernetes.io/name: datalake-shell, app.kubernetes.io/part-of: rahbar}
+    spec:
+      serviceAccountName: datalake-shell
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: shell
+          image: rahbar-indexer:dev
+          imagePullPolicy: IfNotPresent
+          command: ["sleep", "infinity"]
+          envFrom:
+            - configMapRef: {name: rahbar-config}
+          resources:
+            requests: {cpu: 10m, memory: 32Mi}
+            limits: {cpu: 200m, memory: 256Mi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          volumeMounts:
+            - {name: datalake, mountPath: /datalake}
+            - {name: tmp, mountPath: /tmp}
+      volumes:
+        - name: datalake
+          persistentVolumeClaim: {claimName: datalake}
+        - name: tmp
+          emptyDir: {sizeLimit: 64Mi}

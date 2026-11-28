@@ -55,7 +55,7 @@ jobs:
           sudo mv kubeconform /usr/local/bin/
       - name: kustomize build | kubeconform -strict (every overlay)
         run: |
-          for overlay in prod dev ci; do
+          for overlay in prod dev ci lite; do
             echo "== $overlay"
             kubectl kustomize k8s/overlays/$overlay | kubeconform -strict -summary -kubernetes-version 1.30.0
           done

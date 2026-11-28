@@ -80,4 +80,5 @@ def clean(doc: Document) -> Document:
         pages.append(Page(source=page.source, page=page.page,
                           text=clean_text(page.text, drop), ocr=page.ocr))
     return Document(source=doc.source, doc_version=doc.doc_version,
-                    superseded=doc.superseded, pages=pages)
+                    superseded=doc.superseded, pages=pages,
+                    doc_id=doc.doc_id, title=doc.title, sha256=doc.sha256)

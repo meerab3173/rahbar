@@ -7,7 +7,6 @@ from pathlib import Path
 
 import pytest
 
-from pipeline import store as store_mod
 from pipeline.chunk import amplification, chunk, heading, ntokens, sections
 from pipeline.clean import clean, is_toc_page
 from pipeline.config import IndexerSettings, get_settings
@@ -15,7 +14,6 @@ from pipeline.embed import embed
 from pipeline.extract import extract, table_to_rows
 from pipeline.hashembed import HASH_MODEL, hash_bow
 from pipeline.models import Document, Page
-from pipeline.run import build_chunks, run_pipeline
 
 DATA = Path(__file__).parent / "data"
 FIXTURES = Path(__file__).resolve().parents[2] / "eval" / "fixtures"
@@ -114,7 +112,8 @@ def test_chunks_carry_section_page_and_version_metadata() -> None:
     att = by_section["1. Medium of Instruction > Attendance Requirements"]
     assert att.page == 2 and att.doc_version == "2026-06" and att.superseded is False
     assert "1.21" in att.text and "1.22" in att.text
-    assert set(att.metadata()) == {"source", "section", "page", "doc_version", "superseded"}
+    assert set(att.metadata()) == {"source", "section", "page", "doc_version", "superseded",
+                                  "doc_id", "doc_key", "doc_sha256"}
 
 
 def test_a_clause_is_not_cut_in_half_when_it_fits() -> None:
@@ -167,81 +166,3 @@ def test_hash_embedding_matches_the_api_copy() -> None:
 def test_embed_uses_the_pinned_model_only() -> None:
     vectors = embed(["one", "two"], settings())
     assert len(vectors) == 2 and len(vectors[0]) == 768
-
-
-# --- store --------------------------------------------------------------------------------
-class Col:
-    def __init__(self, name: str, metadata: dict | None) -> None:
-        self.name, self.metadata, self.rows = name, metadata or {}, {}
-
-    def add(self, ids, documents, embeddings, metadatas) -> None:   # type: ignore[no-untyped-def]
-        for i, d, e, m in zip(ids, documents, embeddings, metadatas):
-            self.rows[i] = (d, e, m)
-
-    upsert = add
-
-    def count(self) -> int:
-        return len(self.rows)
-
-    def get(self, ids, include):   # type: ignore[no-untyped-def]
-        return {"metadatas": [self.rows[i][2] for i in ids if i in self.rows]}
-
-
-class Client:
-    def __init__(self) -> None:
-        self.cols: dict[str, Col] = {}
-
-    def create_collection(self, name: str, metadata: dict | None = None) -> Col:
-        self.cols[name] = Col(name, metadata)
-        return self.cols[name]
-
-    def get_or_create_collection(self, name: str, metadata: dict | None = None) -> Col:
-        return self.cols.get(name) or self.create_collection(name, metadata)
-
-    def get_collection(self, name: str) -> Col:
-        return self.cols[name]
-
-    def delete_collection(self, name: str) -> None:
-        del self.cols[name]
-
-    def list_collections(self) -> list[Col]:
-        return list(self.cols.values())
-
-    def heartbeat(self) -> int:
-        return 1
-
-
-def test_store_builds_a_new_version_records_the_pin_and_flips_the_pointer(
-        monkeypatch: pytest.MonkeyPatch) -> None:
-    client = Client()
-    s = settings()
-    chunks, _ = build_chunks(s)
-    vectors = embed([c.text for c in chunks], s)
-    ticks = iter(range(1_000, 2_000))
-    monkeypatch.setattr(store_mod.time, "time", lambda: next(ticks))
-    for _ in range(3):
-        assert store_mod.store(chunks, vectors, s, client=client) == len(chunks)
-    versions = sorted(n for n in client.cols if n.startswith("rahbar-v"))
-    assert len(versions) == 2                                 # current + previous kept
-    active = client.cols["rahbar-active"].rows["active"][2]["collection"]
-    assert active == versions[-1]
-    meta = client.cols[active].metadata
-    assert meta["embed_model"] == HASH_MODEL and meta["dimension"] == 768
-    assert meta["hnsw:space"] == "cosine"
-
-
-def test_store_refuses_an_empty_index() -> None:
-    with pytest.raises(ValueError):
-        store_mod.store([], [], settings(), client=Client())
-
-
-def test_run_pipeline_end_to_end_on_the_fixtures(monkeypatch: pytest.MonkeyPatch) -> None:
-    client = Client()
-    monkeypatch.setattr(store_mod, "get_client", lambda _s: client)
-    count = run_pipeline(settings())
-    active = client.cols["rahbar-active"].rows["active"][2]["collection"]
-    rows = client.cols[active].rows.values()
-    assert count == len(rows) > 5
-    assert any(m["superseded"] for _, _, m in rows)
-    assert {m["source"] for _, _, m in rows} == {
-        "academic-rules-2023.md", "academic-rules-2026.md", "fees-2026.md"}

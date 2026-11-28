@@ -68,6 +68,9 @@ class ChromaRetriever:
         self.embedder = embedder or get_embedder(settings.embed_model, settings.ollama_url)
         self._lock = threading.Lock()
         self._active: tuple[float, Any] | None = None
+        # The pointer's generation changes whenever an ingestion run changes the
+        # collection's content (Assignment 03, A2: the collection name no longer does).
+        self._generation = ""
         self._last_conflict: str | None = None
 
     @property
@@ -89,17 +92,20 @@ class ChromaRetriever:
             if self._active and now - self._active[0] < _RESOLVE_SECONDS:
                 return self._active[1]
         name = self.settings.collection
+        generation = ""
         try:
             pointer = self.client.get_collection(self.settings.collection + POINTER_SUFFIX)
             got = pointer.get(ids=[POINTER_ID], include=["metadatas"])
             metas = got.get("metadatas") or []
             if metas and metas[0] and metas[0].get("collection"):
                 name = str(metas[0]["collection"])
+                generation = str(metas[0].get("generation") or "")
         except Exception:  # no pointer yet: the dummy index, or a first run in progress
             pass
         collection = self.client.get_collection(name)
         with self._lock:
             self._active = (now, collection)
+            self._generation = generation
         return collection
 
     def pin_conflict(self, collection: Any) -> str | None:
@@ -160,10 +166,14 @@ class ChromaRetriever:
         return checks
 
     def generation(self) -> str:
+        """What the semantic cache keys on: the collection, and its content generation.
+        An incremental re-index keeps the collection name, so the name alone would keep
+        serving answers built from chunks that no longer exist."""
         try:
-            return str(self._resolve().name)
+            name = str(self._resolve().name)
         except Exception:
             return "unknown"
+        return f"{name}@{self._generation}" if self._generation else name
 
     # --- the query ----------------------------------------------------------------------
     def retrieve(

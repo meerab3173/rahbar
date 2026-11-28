@@ -109,7 +109,8 @@ def fetch(force: bool) -> int:
             if old and not force and (RAW / old["file"]).exists() and old["url"] == url:
                 print(f"  have    {old['file']}")
                 entries.append({**old, "doc_version": doc.get("doc_version", "unknown"),
-                                "superseded": bool(doc.get("superseded", False))})
+                                "superseded": bool(doc.get("superseded", False)),
+                                "doc_id": doc.get("doc_id", ""), "title": name})
                 continue
             print(f"  fetch   {name}")
             try:
@@ -129,6 +130,8 @@ def fetch(force: bool) -> int:
                     "fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
                     "doc_version": doc.get("doc_version", "unknown"),
                     "superseded": bool(doc.get("superseded", False)),
+                    # Assignment 03, Part A: the data lake groups versions by doc_id
+                    "doc_id": doc.get("doc_id", ""), "title": name,
                 })
                 print(f"          {file}, {len(response.content):,} bytes")
             except Exception as exc:  # report every failure, keep going

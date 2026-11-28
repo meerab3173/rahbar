@@ -139,11 +139,15 @@ class FakeCollection:
 
 
 class PointerCollection:
-    def __init__(self, target: str) -> None:
+    def __init__(self, target: str, generation: str = "") -> None:
         self.name, self.metadata, self.target = "rahbar-active", {}, target
+        self.generation = generation
 
     def get(self, ids: list[str], include: list[str]) -> dict:
-        return {"ids": ["active"], "metadatas": [{"collection": self.target}]}
+        meta = {"collection": self.target}
+        if self.generation:
+            meta["generation"] = self.generation
+        return {"ids": ["active"], "metadatas": [meta]}
 
 
 class FakeChroma:
