@@ -23,6 +23,7 @@ from .retrieval import get_retriever
 from .routes import ask, health, metrics
 from .services.answer import Pipeline
 from .services.cache import get_cache
+from .tracing import TraceSink
 
 log = logging.getLogger("rahbar.api")
 APP_VERSION = os.environ.get("APP_VERSION", "dev")
@@ -40,6 +41,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     app.state.pipeline = Pipeline(
         settings=settings, retriever=retriever, provider=provider,
         embedder=getattr(retriever, "embedder", None), cache=cache,
+        tracer=TraceSink(settings.trace_dir),
     )
     app.state.retriever, app.state.provider = retriever, provider
     # The embedding pin (4.4): compare the active collection's embed_model metadata with
@@ -52,7 +54,8 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         "api started",
         extra={"retriever": settings.retriever, "llm_provider": settings.llm_provider,
                "embed_model": settings.embed_model, "top_k": settings.top_k,
-               "cache_backend": settings.cache_backend, "temperature": settings.temperature},
+               "cache_backend": settings.cache_backend, "temperature": settings.temperature,
+               "trace_dir": settings.trace_dir or "(stdout only)"},
     )
     yield
 

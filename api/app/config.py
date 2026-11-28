@@ -60,6 +60,9 @@ class Settings:
 
     log_level: str = "INFO"
 
+    # Part D: trace records. Always to stdout; also to this directory (a PVC) when set.
+    trace_dir: str = ""              # TRACE_DIR, e.g. /traces
+
 
 def get_settings() -> Settings:
     return Settings(
@@ -85,6 +88,7 @@ def get_settings() -> Settings:
         cache_ttl_seconds=_int("CACHE_TTL_SECONDS", 86400),
         cache_max_entries=_int("CACHE_MAX_ENTRIES", 200),
         log_level=os.environ.get("LOG_LEVEL", "INFO"),
+        trace_dir=os.environ.get("TRACE_DIR", ""),
     )
 
 

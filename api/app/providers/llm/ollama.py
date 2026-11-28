@@ -21,6 +21,13 @@ class OllamaProvider(ChatJSONProvider):
         self.url = settings.ollama_url.rstrip("/")
         self.schema = Answer.model_json_schema()
 
+    NUM_CTX = 8192
+
+    def params(self) -> dict[str, object]:
+        return {"provider": self.name, "model": self.settings.llm_model,
+                "temperature": self.settings.temperature, "num_ctx": self.NUM_CTX,
+                "format": "Answer JSON schema", "timeout_s": self.settings.llm_timeout}
+
     def _chat(self, messages: list[dict[str, str]]) -> ChatReply:
         response = httpx.post(
             f"{self.url}/api/chat",
@@ -29,7 +36,7 @@ class OllamaProvider(ChatJSONProvider):
                 "messages": messages,
                 "format": self.schema,
                 "stream": False,
-                "options": {"temperature": self.settings.temperature, "num_ctx": 8192},
+                "options": {"temperature": self.settings.temperature, "num_ctx": self.NUM_CTX},
             },
             timeout=httpx.Timeout(self.settings.llm_timeout, connect=5.0),
         )

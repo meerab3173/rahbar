@@ -50,3 +50,5 @@ data:
   CACHE_TTL_SECONDS: "86400"
   CACHE_MAX_ENTRIES: "200"
   LOG_LEVEL: "INFO"
+  # --- traces (Assignment 03, Part D): stdout always, and this PVC ---
+  TRACE_DIR: "/traces"

@@ -114,16 +114,54 @@ def injection_payload(line: str) -> str:
     return _norm(first_sentence)
 
 
+_SENTENCE = re.compile(r"(?<=[.!?])\s+")
+REDACTED = "[instruction-like text removed by RAHBAR]"
+
+
+def redact_injections(text: str) -> tuple[str, list[str]]:
+    """Assignment 03, D4: a retrieval rail. Remove each sentence of a retrieved chunk that
+    tries to instruct the model, before the model sees it. Returns the cleaned text and
+    the removed sentences (they go into the trace, not into the prompt)."""
+    removed: list[str] = []
+    lines = []
+    for line in text.splitlines():
+        kept = []
+        for sentence in _SENTENCE.split(line):
+            if _INJECTION.search(sentence):
+                removed.append(sentence.strip())
+                kept.append(REDACTED)
+            else:
+                kept.append(sentence)
+        lines.append(" ".join(kept))
+    return "\n".join(lines), removed
+
+
+def _content_words(text: str) -> set[str]:
+    from ..embedding import tokens   # the same stop-word list as the embeddings
+
+    return {t for t in tokens(text) if len(t) > 2}
+
+
 def echoes_injection(answer: Answer, passages: list[Passage]) -> bool:
     """True when a passage carries an instruction-like line and the answer repeats it or
     its payload. The schema already confines the model to answer-shaped output; this is
-    the second wall."""
+    the second wall.
+
+    Assignment 03: a paraphrased echo counts too. A planted claim of four or more content
+    words counts as echoed when the answer contains at least 80% of them (a trace showed
+    "they are reported to parents and teachers" slipping past the exact-substring test).
+    """
     if looks_injected(answer.answer):
         return True
     said = _norm(answer.answer)
+    said_words = _content_words(answer.answer)
     for p in passages:
         for line in p.text.splitlines():
-            payload = injection_payload(line)
-            if len(payload) >= 8 and payload in said:
-                return True
+            for sentence in _SENTENCE.split(line):
+                payload = injection_payload(sentence)
+                if len(payload) >= 8 and payload in said:
+                    return True
+                words = _content_words(payload)
+                if len(words) >= 4 and len(words & said_words) / len(words) >= 0.8:
+                    return True
     return False

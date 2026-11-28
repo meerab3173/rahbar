@@ -80,6 +80,9 @@ class HashEmbedder:
     def __init__(self, model: str = HASH_MODEL) -> None:
         self.model = model
 
+    def version(self) -> str:
+        return "builtin"   # an algorithm in this repository, not a downloaded model
+
     def embed(self, text: str) -> list[float]:
         return dummy_vector(text) if self.model == DUMMY_MODEL else hash_bow(text)
 
@@ -90,6 +93,24 @@ class OllamaEmbedder:
         self.url = url.rstrip("/")
         self.timeout = timeout
         self.prefix = QUERY_PREFIXES.get(model.split(":")[0], "")
+        self._version: str | None = None
+
+    def version(self) -> str:
+        """The exact model build Ollama serves: its tag and digest, e.g.
+        nomic-embed-text:latest@0a109f422b47 (the trace's embedding version, D1)."""
+        if self._version:
+            return self._version
+        try:
+            response = httpx.get(f"{self.url}/api/tags", timeout=5.0)
+            response.raise_for_status()
+            wanted = self.model if ":" in self.model else self.model + ":latest"
+            for m in response.json().get("models") or []:
+                if m.get("name") == wanted or m.get("model") == wanted:
+                    self._version = f"{wanted}@{str(m.get('digest', ''))[:12]}"
+                    return self._version
+        except Exception:
+            return "unknown"
+        return "unknown"
 
     def embed(self, text: str) -> list[float]:
         response = httpx.post(

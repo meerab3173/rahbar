@@ -8,6 +8,7 @@ resources:
   - serviceaccounts.yaml
   - configmap.yaml
   - datalake-pvc.yaml
+  - traces-pvc.yaml
   - networkpolicy.yaml
   - chroma-statefulset.yaml
   - redis.yaml

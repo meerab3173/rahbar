@@ -18,6 +18,7 @@ from pydantic import ValidationError
 
 from ...schemas import Answer, Passage
 from ...services.prompt import RETRY_MESSAGE, build_messages
+from ...tracing import record_prompt
 from ...telemetry import RETRIES
 
 log = logging.getLogger("rahbar.llm")
@@ -74,6 +75,14 @@ def _record(reply: ChatReply) -> None:
 class ChatJSONProvider:
     name = "chat"
 
+    def params(self) -> dict[str, object]:
+        """Model and parameters for the trace record (D1)."""
+        settings = getattr(self, "settings", None)
+        if settings is None:
+            return {"provider": self.name}
+        return {"provider": self.name, "model": settings.llm_model,
+                "temperature": settings.temperature, "timeout_s": settings.llm_timeout}
+
     def _chat(self, messages: list[dict[str, str]]) -> ChatReply:  # pragma: no cover
         raise TypeError(f"{type(self).__name__} must implement _chat")
 
@@ -81,6 +90,7 @@ class ChatJSONProvider:
         messages = build_messages(question, passages)
         last_error = ""
         for attempt in (1, 2):                      # enforce, validate, retry once
+            record_prompt(messages, attempt)        # the trace keeps the exact prompt (D2)
             try:
                 reply = self._chat(messages)
             except Exception as exc:                # timeout, connection refused, 5xx

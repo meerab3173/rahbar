@@ -22,6 +22,7 @@ from typing import Any
 from ..config import Settings
 from ..embedding import Embedder, get_embedder
 from ..schemas import Passage
+from ..tracing import current as current_trace
 
 log = logging.getLogger("rahbar.retrieval")
 
@@ -205,9 +206,16 @@ class ChromaRetriever:
         dists = (result.get("distances") or [[]])[0]
 
         scored: list[tuple[float, Passage]] = []
+        candidates: list[dict[str, Any]] = []
         for cid, text, meta, dist in zip(ids, docs, metas, dists):
             meta = meta or {}
             similarity = 1.0 - float(dist)          # Chroma returns cosine distance
+            candidates.append({
+                "chunk_id": str(cid), "doc_id": meta.get("doc_id"),
+                "doc_key": meta.get("doc_key"), "doc_version": meta.get("doc_version"),
+                "source": meta.get("source"), "page": meta.get("page"),
+                "superseded": bool(meta.get("superseded", False)),
+                "score": round(similarity, 4)})
             passage = Passage(
                 chunk_id=str(cid), text=str(text or ""),
                 source=str(meta.get("source", "?")), section=str(meta.get("section", "")),
@@ -218,6 +226,21 @@ class ChromaRetriever:
             )
             rank = similarity + self.settings.hybrid_weight * exact_boost(
                 question, passage.section + " " + passage.text)
+            candidates[-1]["rank_score"] = round(rank, 4)
             scored.append((rank, passage))
         scored.sort(key=lambda pair: pair[0], reverse=True)
-        return [p for _, p in scored[:k]]
+        top = [p for _, p in scored[:k]]
+        trace = current_trace()
+        if trace is not None:   # Part D1: what was searched, how, and what came back
+            meta = collection.metadata or {}
+            trace["collection"] = {"name": collection.name, "generation": self.generation(),
+                                   "index_embed_model": meta.get("embed_model"),
+                                   "dimension": meta.get("dimension"),
+                                   "chunk_size": meta.get("chunk_size"),
+                                   "chunk_overlap": meta.get("chunk_overlap")}
+            trace["filters"] = where if where is not None else {}
+            trace["search"] = {"n_results": n, "hybrid_weight": self.settings.hybrid_weight}
+            trace["candidates"] = candidates               # vector order, before the rerank
+            by_id = {c["chunk_id"]: c for c in candidates}
+            trace["reranked"] = [by_id[p.chunk_id] for p in top]
+        return top
