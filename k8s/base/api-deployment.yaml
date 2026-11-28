@@ -45,10 +45,10 @@ spec:
           resources:
             requests:
               cpu: 100m
-              memory: 192Mi
+              memory: 128Mi
             limits:
               cpu: 500m
-              memory: 384Mi
+              memory: 256Mi
           startupProbe:            # finished booting? liveness and readiness wait for it
             httpGet: {path: /healthz, port: 8000}
             failureThreshold: 30
