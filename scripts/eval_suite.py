@@ -230,7 +230,7 @@ def one_run(a, golden, run_no) -> tuple[dict, list[dict]]:
     print(f"=== run {run_no}: noise test (typos in the queries)", file=sys.stderr)
     flush(a)
     rng, noisy = random.Random(42), []
-    for q in golden:
+    for q in ([] if a.no_noise else golden):
         if q["answerable"] and q.get("ground_truth"):
             tq = typo(q["question"], rng)
             resp, _ = ask(tq)
@@ -291,8 +291,11 @@ def table(runs, golden, a) -> str:
                 diff = f" {fmt(d)} |"
             lines.append(f"| {level} | {k} | " + " | ".join(fmt(v) for v in vals) + " |" + diff)
     c, t = runs[0]["component"], runs[0]["component_typos"]
-    lines += ["", "Noise test (run 1, typos minus clean): " + ", ".join(
-        f"{k} {fmt((t[k] or 0) - (c[k] or 0))}" for k in c)]
+    if any(v is not None for v in t.values()):
+        lines += ["", "Noise test (run 1, typos minus clean): " + ", ".join(
+            f"{k} {fmt((t[k] or 0) - (c[k] or 0))}" for k in c)]
+    else:
+        lines += ["", "Noise test skipped (--no-noise)."]
     return "\n".join(lines)
 
 
@@ -322,6 +325,7 @@ def main() -> int:
     ap.add_argument("--page-tolerance", type=int, default=0)
     ap.add_argument("--label", default="", help="added to the file name, e.g. baseline")
     ap.add_argument("--flush-cmd", default="kubectl -n rahbar exec deploy/redis -- redis-cli FLUSHALL")
+    ap.add_argument("--no-noise", action="store_true", help="skip the typo pass (faster)")
     ap.add_argument("--agreement", help="a -judge.csv with the 'human' column filled in")
     a = ap.parse_args()
     if a.agreement:

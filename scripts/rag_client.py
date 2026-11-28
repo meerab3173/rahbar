@@ -16,12 +16,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def ask(question: str, timeout: int = 600) -> tuple[dict, float]:
+def ask(question: str, timeout: int = 900) -> tuple[dict, float]:
     """Ask one question through `make ask`. Returns (response json, seconds)."""
     q = question.replace('"', "").replace("'", "").replace("$", "").replace("`", "")
     t0 = time.perf_counter()
-    out = subprocess.run(["make", "-s", "ask", f"Q={q}"], cwd=ROOT, capture_output=True,
-                         text=True, timeout=timeout)
+    try:
+        out = subprocess.run(["make", "-s", "ask", f"Q={q}"], cwd=ROOT, capture_output=True,
+                             text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        return {"error": f"timed out after {timeout}s"}, time.perf_counter() - t0
     seconds = time.perf_counter() - t0
     text = out.stdout
     m = re.search(r"^\{\s*$", text, flags=re.M)
