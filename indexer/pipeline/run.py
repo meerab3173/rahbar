@@ -36,7 +36,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-import yaml
+import yaml  # type: ignore[import-untyped]  # no types-PyYAML in CI
 
 from .config import IndexerSettings, get_settings
 from .lake import Catalog, DataLake, Entry, new_run_id
